@@ -1,9 +1,10 @@
-// Asteroids.cpp : Este arquivo contém a função 'main'. A execução do programa começa e termina ali.
-//
+// Este arquivo contém a função 'main'. A execução do programa começa e termina aqui.
 
 #include <iostream>
+#include <conio.h>
 #include <Windows.h>
 #include "Space.h"
+#include "HUD.h"
 
 void showConsoleCursor(bool showFlag)
 {
@@ -14,34 +15,8 @@ void showConsoleCursor(bool showFlag)
 	SetConsoleCursorInfo(out, &cursorInfo);
 }
 
-void printMainScreen(HUD hud, Cursor cursor, ScreenLimit limit) {
-	system("cls");
-	cursor.goToNewGame(limit);
-	std::cout << "New Game";
-	cursor.goToExit(limit);
-	std::cout << "Exit";
-	hud.printHelpIcon(limit);
-}
-void printDifficultySelection(HUD hud, Cursor cursor, ScreenLimit limit) {
-	system("cls");
-	cursor.goToSelectDifficulty(limit);
-	std::cout << "Select Difficulty";
-	cursor.goToDifficultyEasy(limit);
-	std::cout << "Easy";
-	cursor.goToDifficultyNormal(limit);
-	std::cout << "Normal";
-	cursor.goToDifficultyHard(limit);
-	std::cout << "Hard";
-	cursor.goToDifficultyExtreme(limit);
-	std::cout << "Extreme";
-	cursor.goToDifficultyBack(limit);
-	std::cout << "Back";
-	hud.printHelpIcon(limit);
-}
-
 int main()
 {
-	const char ARROW = 175;
 	char key;
 	bool exit = false;
 	showConsoleCursor(false);
@@ -50,137 +25,122 @@ int main()
 	int arrowMainScreen = 0;
 	int arrowDifficulty;
 	bool exitDifficulty;
-	printMainScreen(space.getHUD(), space.getCursor(), limit);
+	HUD().printMainScreen(limit);
 	while (!exit) {
 		switch (arrowMainScreen) {
 			case 0:
-				space.getCursor().goToArrowNewGame(limit);
-				std::cout << ARROW;
+				HUD().printArrowNewGame(limit);
 				key = _getch();
 				switch (key) {
 					case 's': // down arrow
-						space.getCursor().goToArrowNewGame(limit);
-						std::cout << ' ';
+						HUD().unprintArrowNewGame(limit);
 						arrowMainScreen = 1;
 						break;
 					case 'j': // select difficulty
 						arrowDifficulty = 1;
 						exitDifficulty = false;
-						printDifficultySelection(space.getHUD(), space.getCursor(), limit);
+						HUD().printDifficultySelection(limit);
 						while (!exitDifficulty) {
 							switch (arrowDifficulty) {
 								case 0: // easy
-									space.getCursor().goToDifficultyArrowEasy(limit);
-									std::cout << ARROW;
+									HUD().printDifficultyArrowEasy(limit);
 									key = _getch();
 									switch (key) {
 										case 's': // go down
-											space.getCursor().goToDifficultyArrowEasy(limit);
-											std::cout << ' ';
+											HUD().unprintDifficultyArrowEasy(limit);
 											arrowDifficulty++;
 											break;
 										case 'j': // start game
 											space.game(arrowDifficulty, limit);
-											printDifficultySelection(space.getHUD(), space.getCursor(), limit);
+											HUD().printDifficultySelection(limit);
 											break;
 										case 'h': // show help page
-											space.getHUD().printHelp(limit);
-											printDifficultySelection(space.getHUD(), space.getCursor(), limit);
+											HUD().printHelp(limit);
+											HUD().printDifficultySelection(limit);
 											break;
 									}
 									break;
 								case 1: // normal
-									space.getCursor().goToDifficultyArrowNormal(limit);
-									std::cout << ARROW;
+									HUD().printDifficultyArrowNormal(limit);
 									key = _getch();
 									switch (key) {
 										case 'w': // go up
-											space.getCursor().goToDifficultyArrowNormal(limit);
-											std::cout << ' ';
+											HUD().unprintDifficultyArrowNormal(limit);
 											arrowDifficulty--;
 											break;
 										case 's': // go down
-											space.getCursor().goToDifficultyArrowNormal(limit);
-											std::cout << ' ';
+											HUD().unprintDifficultyArrowNormal(limit);
 											arrowDifficulty++;
 											break;
 										case 'j': // start game
 											space.game(arrowDifficulty, limit);
-											printDifficultySelection(space.getHUD(), space.getCursor(), limit);
+											HUD().printDifficultySelection(limit);
 											break;
 										case 'h': // show help page
-											space.getHUD().printHelp(limit);
-											printDifficultySelection(space.getHUD(), space.getCursor(), limit);
+											HUD().printHelp(limit);
+											HUD().printDifficultySelection(limit);
 											break;
 									}
 									break;
 								case 2: // hard
-									space.getCursor().goToDifficultyArrowHard(limit);
-									std::cout << ARROW;
+									HUD().printDifficultyArrowHard(limit);
 									key = _getch();
 									switch (key) {
 										case 'w': // go up
-											space.getCursor().goToDifficultyArrowHard(limit);
-											std::cout << ' ';
+											HUD().unprintDifficultyArrowHard(limit);
 											arrowDifficulty--;
 											break;
 										case 's': // go down
-											space.getCursor().goToDifficultyArrowHard(limit);
-											std::cout << ' ';
+											HUD().unprintDifficultyArrowHard(limit);
 											arrowDifficulty++;
 											break;
 										case 'j': // start game
 											space.game(arrowDifficulty, limit);
-											printDifficultySelection(space.getHUD(), space.getCursor(), limit);
+											HUD().printDifficultySelection(limit);
 											break;
 										case 'h': // show help page
-											space.getHUD().printHelp(limit);
-											printDifficultySelection(space.getHUD(), space.getCursor(), limit);
+											HUD().printHelp(limit);
+											HUD().printDifficultySelection(limit);
 											break;
 									}
 									break;
 								case 3: // extreme
-									space.getCursor().goToDifficultyArrowExtreme(limit);
-									std::cout << ARROW;
+									HUD().printDifficultyArrowExtreme(limit);
 									key = _getch();
 									switch (key) {
 										case 'w': // go up
-											space.getCursor().goToDifficultyArrowExtreme(limit);
-											std::cout << ' ';
+											HUD().unprintDifficultyArrowExtreme(limit);
 											arrowDifficulty--;
 											break;
 										case 's': // go down
-											space.getCursor().goToDifficultyArrowExtreme(limit);
-											std::cout << ' ';
+											HUD().unprintDifficultyArrowExtreme(limit);
 											arrowDifficulty++;
 											break;
 										case 'j': // start game
 											space.game(arrowDifficulty, limit);
-											printDifficultySelection(space.getHUD(), space.getCursor(), limit);
+											HUD().printDifficultySelection(limit);
 											break;
 										case 'h': // show help page
-											space.getHUD().printHelp(limit);
-											printDifficultySelection(space.getHUD(), space.getCursor(), limit);
+											HUD().printHelp(limit);
+											HUD().printDifficultySelection(limit);
 											break;
 									}
 									break;
 								case 4: // back
-									space.getCursor().goToDifficultyArrowBack(limit);
-									std::cout << ARROW;
+									HUD().printDifficultyArrowBack(limit);
 									key = _getch();
 									switch (key) {
 										case 'w': // go up
-											space.getCursor().goToDifficultyArrowBack(limit);
-											std::cout << ' ';
+											HUD().unprintDifficultyArrowBack(limit);
 											arrowDifficulty--;
 											break;
 										case 'j': // go back
 											exitDifficulty = true;
-											printMainScreen(space.getHUD(), space.getCursor(), limit);
+											HUD().printMainScreen(limit);
 											break;
 										case 'h': // show help page
-											space.getHUD().printHelp(limit);
-											printDifficultySelection(space.getHUD(), space.getCursor(), limit);
+											HUD().printHelp(limit);
+											HUD().printDifficultySelection(limit);
 											break;
 									}
 									break;
@@ -188,27 +148,25 @@ int main()
 						}
 						break;
 					case 'h': // show help page
-						space.getHUD().printHelp(limit);
-						printMainScreen(space.getHUD(), space.getCursor(), limit);
+						HUD().printHelp(limit);
+						HUD().printMainScreen(limit);
 						break;
 				}
 				break;
 			case 1:
-				space.getCursor().goToArrowExit(limit);
-				std::cout << ARROW;
+				HUD().printArrowExit(limit);
 				key = _getch();
 				switch (key) {
 					case 'w': // up arrow
-						space.getCursor().goToArrowExit(limit);
-						std::cout << ' ';
+						HUD().unprintArrowExit(limit);
 						arrowMainScreen = 0;
 						break;
 					case 'j': // exit
 						exit = true;
 						break;
 					case 'h': // show help page
-						space.getHUD().printHelp(limit);
-						printMainScreen(space.getHUD(), space.getCursor(), limit);
+						HUD().printHelp(limit);
+						HUD().printMainScreen(limit);
 						break;
 				}
 				break;

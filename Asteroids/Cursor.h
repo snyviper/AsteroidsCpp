@@ -48,9 +48,6 @@ public:
 
     void goToPaused(ScreenLimit limit);
 
-    /*void goToLastPosition(ScreenLimit limit);
-    void goDown(ScreenLimit limit);*/
-
     void goToHelpW(ScreenLimit limit);
     void goToHelpA(ScreenLimit limit);
     void goToHelpS(ScreenLimit limit);

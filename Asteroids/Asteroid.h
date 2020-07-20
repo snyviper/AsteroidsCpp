@@ -1,10 +1,8 @@
 #ifndef ASTEROID_H
 #define ASTEROID_H
 
-#include "Asteroid.h"
 #include "Coords.h"
 #include "ScreenLimit.h"
-#include "Bullet.h"
 
 class Asteroid
 {

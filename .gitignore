@@ -34,3 +34,6 @@
 #debug folder
 Debug/*
 Asteroids/Debug/*
+x64/*
+.vs/*
+Asteroids/x64/*

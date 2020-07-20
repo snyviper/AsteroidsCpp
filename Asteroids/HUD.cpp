@@ -6,23 +6,24 @@
 
 //private:
 
-void HUD::printHealth() {
+Cursor HUD::cursor = Cursor();
+
+void HUD::printHealth(int hearts) {
 	cursor.goToHealth();
 	std::cout << "Health:";
-	printHearts();
+	printHearts(hearts);
 }
-void HUD::printHearts() {
+void HUD::printHearts(int hearts) {
 	std::string allHearts = "";
 	cursor.goToHearts();
-	for (int i = 0; i < hearts; i++) {
+	for (int i = 0; i < hearts; i++)
 		allHearts += HEART;
-	}
 	std::cout << std::setfill(' ') << std::setw(4) << std::left << allHearts;
 }
-void HUD::printScoreWord(ScreenLimit limit) {
+void HUD::printScoreWord(int score, ScreenLimit limit) {
 	cursor.goToScoreWord(6, limit);
 	std::cout << "Score: ";
-	printScoreValue(limit);
+	printScoreValue(score, limit);
 }
 void HUD::printTopBorder(ScreenLimit limit) {
 	std::string topBorder = "";
@@ -40,7 +41,7 @@ void HUD::printBottomBorder(ScreenLimit limit) {
 	}
 	std::cout << bottomBorder;
 }
-void HUD::printFPSName(float fps, ScreenLimit limit) {
+void HUD::printFPSName(double fps, ScreenLimit limit) {
 	cursor.goToFPSName(limit);
 	std::cout << "FPS:";
 	printFPS(fps, limit);
@@ -60,13 +61,88 @@ void HUD::printExit(ScreenLimit limit) {
 }
 
 //public:
-HUD::HUD() {
-	hearts = 3;
-	score = 0;
+HUD::HUD() {}
+
+void HUD::printMainScreen(ScreenLimit limit) {
+	system("cls");
+	cursor.goToNewGame(limit);
+	std::cout << "New Game";
+	cursor.goToExit(limit);
+	std::cout << "Exit";
+	printHelpIcon(limit);
 }
-HUD::HUD(int difficulty) {
-	setHearts(difficulty);
-	score = 0;
+void HUD::printArrowNewGame(ScreenLimit limit) {
+	cursor.goToArrowNewGame(limit);
+	std::cout << ARROW;
+}
+void HUD::unprintArrowNewGame(ScreenLimit limit) {
+	cursor.goToArrowNewGame(limit);
+	std::cout << ' ';
+}
+void HUD::printArrowExit(ScreenLimit limit) {
+	cursor.goToArrowExit(limit);
+	std::cout << ARROW;
+}
+void HUD::unprintArrowExit(ScreenLimit limit) {
+	cursor.goToArrowExit(limit);
+	std::cout << ' ';
+}
+
+void HUD::printDifficultySelection(ScreenLimit limit) {
+	system("cls");
+	cursor.goToSelectDifficulty(limit);
+	std::cout << "Select Difficulty";
+	cursor.goToDifficultyEasy(limit);
+	std::cout << "Easy";
+	cursor.goToDifficultyNormal(limit);
+	std::cout << "Normal";
+	cursor.goToDifficultyHard(limit);
+	std::cout << "Hard";
+	cursor.goToDifficultyExtreme(limit);
+	std::cout << "Extreme";
+	cursor.goToDifficultyBack(limit);
+	std::cout << "Back";
+	printHelpIcon(limit);
+}
+void HUD::printDifficultyArrowEasy(ScreenLimit limit) {
+	cursor.goToDifficultyArrowEasy(limit);
+	std::cout << ARROW;
+}
+void HUD::unprintDifficultyArrowEasy(ScreenLimit limit) {
+	cursor.goToDifficultyArrowEasy(limit);
+	std::cout << ' ';
+}
+void HUD::printDifficultyArrowNormal(ScreenLimit limit) {
+	cursor.goToDifficultyArrowNormal(limit);
+	std::cout << ARROW;
+}
+void HUD::unprintDifficultyArrowNormal(ScreenLimit limit) {
+	cursor.goToDifficultyArrowNormal(limit);
+	std::cout << ' ';
+}
+void HUD::printDifficultyArrowHard(ScreenLimit limit) {
+	cursor.goToDifficultyArrowHard(limit);
+	std::cout << ARROW;
+}
+void HUD::unprintDifficultyArrowHard(ScreenLimit limit) {
+	cursor.goToDifficultyArrowHard(limit);
+	std::cout << ' ';
+}
+void HUD::printDifficultyArrowExtreme(ScreenLimit limit) {
+	cursor.goToDifficultyArrowExtreme(limit);
+	std::cout << ARROW;
+}
+void HUD::unprintDifficultyArrowExtreme(ScreenLimit limit) {
+	cursor.goToDifficultyArrowExtreme(limit);
+	std::cout << ' ';
+}
+void HUD::printDifficultyArrowBack(ScreenLimit limit) {
+	cursor.goToDifficultyArrowBack(limit);
+	std::cout << ARROW;
+}
+void HUD::unprintDifficultyArrowBack(ScreenLimit limit) {
+	cursor.goToDifficultyArrowBack(limit);
+	std::cout << ' ';
 }
 
 void HUD::blinkShip(Ship ship, ScreenLimit limit, bool visible) {
@@ -83,35 +159,35 @@ void HUD::blinkShip(Ship ship, ScreenLimit limit, bool visible) {
 }
 void HUD::printShip(Ship ship, ScreenLimit limit) {
 	cursor.goToXY(ship.getX(), ship.getY(), limit);
-	std::cout << 'O';
+	std::cout << SHIP_BODY;
 	cursor.goToXY(ship.getScopeX(), ship.getScopeY(), limit);
 	// 7 0 1
 	// 6   2
 	// 5 4 3
 	switch (ship.getFacing()) {
 		case 0:
-			std::cout << '|';
+			std::cout << FACE_VERTICAL;
 			break;
 		case 1:
-			std::cout << '/';
+			std::cout << FACE_45_DEGREES;
 			break;
 		case 2:
 			std::cout << FACE_HORIZONTAL;
 			break;
 		case 3:
-			std::cout << '\\';
+			std::cout << FACE_135_DEGREES;
 			break;
 		case 4:
-			std::cout << '|';
+			std::cout << FACE_VERTICAL;
 			break;
 		case 5:
-			std::cout << '/';
+			std::cout << FACE_45_DEGREES;
 			break;
 		case 6:
 			std::cout << FACE_HORIZONTAL;
 			break;
 		case 7:
-			std::cout << '\\';
+			std::cout << FACE_135_DEGREES;
 			break;
 	}
 }
@@ -154,60 +230,11 @@ void HUD::printInstructions(ScreenLimit limit) {
 	std::cout << "to start";
 }
 
-void HUD::setHearts(int difficulty) {
-	switch (difficulty) {
-		case 0:
-			hearts = 4;
-			break;
-		case 1:
-			hearts = 3;
-			break;
-		case 2:
-			hearts = 2;
-			break;
-		case 3:
-			hearts = 1;
-			break;
-	}
-}
-int HUD::getHearts() {
-	return hearts;
-}
-void HUD::removeHeart() {
-	hearts--;
-}
-void HUD::addHeart() {
-	hearts++;
-}
-
-void HUD::addScoreAsteroidSmall(int difficulty, int stage) {
-	score += (15+stage*3)*(difficulty+1);
-}
-void HUD::addScoreAsteroidBig(int difficulty, int stage) {
-	score += (5+stage)*(difficulty+1);
-}
-void HUD::addScoreClearAsteroids(int difficulty, int stage) {
-	switch (difficulty) {
-		case 0:
-			score += 50 + stage*10;
-			break;
-		case 1:
-			score += 100 + stage*20;
-			break;
-		case 2:
-			score += 200 + stage*40;
-			break;
-		case 3:
-			score += 400 + stage*80;
-			break;
-	}
-}
-
-void HUD::refreshHUD(float fps, ScreenLimit limit) {
+void HUD::refreshHUD(int hearts, int score, double fps, ScreenLimit limit) {
 	system("cls");
-	printHealth();
+	printHealth(hearts);
 	printTopBorder(limit);
-	printScoreWord(limit);
+	printScoreWord(score, limit);
 	printFPSName(fps, limit);
 	printBottomBorder(limit);
 }
@@ -222,16 +249,7 @@ void HUD::startMainScreen(ScreenLimit limit) {
 	printHelp(limit);
 }
 
-void HUD::printArrowNewGame(ScreenLimit limit) {
-	cursor.goToArrowNewGame(limit);
-	std::cout << ARROW;
-}
-void HUD::printArrowExit(ScreenLimit limit) {
-	cursor.goToArrowExit(limit);
-	std::cout << ARROW;
-}
-
-void HUD::printScoreValue(ScreenLimit limit) {
+void HUD::printScoreValue(int score, ScreenLimit limit) {
 	cursor.goToScoreValue(6, limit);
 	if (score > 999999)
 		std::cout << "999999";
@@ -239,15 +257,13 @@ void HUD::printScoreValue(ScreenLimit limit) {
 		std::cout << std::internal << std::setfill('0') << std::setw(6) << score;
 }
 
-void HUD::printFPS(float fps, ScreenLimit limit) {
+void HUD::printFPS(double fps, ScreenLimit limit) {
 	cursor.goToFPS(limit);
 	if (fps > 99.9)
 		std::cout << "99.9";
 	else
 		std::cout << std::internal << std::fixed << std::setprecision(1) << std::setfill('0') << std::setw(4) << fps;
 }
-
-Cursor HUD::getCursor() { return cursor; }
 
 void HUD::printHelp(ScreenLimit limit) {
 	system("cls");
@@ -275,14 +291,7 @@ void HUD::printHelpIcon(ScreenLimit limit) {
 	std::cout << HELP_BOTTOM_LEFT << HELP_HORIZONTAL << HELP_HORIZONTAL << HELP_HORIZONTAL << HELP_BOTTOM_RIGHT;
 }
 
-bool HUD::pause(ScreenLimit limit) {
-	char key;
+void HUD::printPause(ScreenLimit limit) {
 	cursor.goToPaused(limit);
 	std::cout << "* Paused *";
-	key = _getch();
-	if (key == 'h') {
-		printHelp(limit);
-		return true;
-	}
-	else { return false; }
 }
