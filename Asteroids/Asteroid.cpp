@@ -1,4 +1,5 @@
 #include "Asteroid.h"
+#include "ScreenLimit.h"
 #include <windows.h>
 #include <time.h>
 
@@ -104,16 +105,16 @@ int Asteroid::randomSpeed(int difficulty) {
 
 Asteroid::Asteroid() { }
 
-Asteroid::Asteroid(int difficulty, ScreenLimit limit) { // creates a big asteroid
+Asteroid::Asteroid(int difficulty) { // creates a big asteroid
 	big = true;
-	int x = randomPosition(limit.getSpaceX()), y = randomPosition(limit.getSpaceY());
+	int x = randomPosition(ScreenLimit().getSpaceX()), y = randomPosition(ScreenLimit().getSpaceY());
 	for (int i = -1, index = 0; i <= 1; i++) {
 		for (int j = -1; j <= 1; j++, index++)
-			position[index].setPosition(x + j, y + i, limit);
+			position[index].setPosition(x + j, y + i);
 	}
 	speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
 }
-Asteroid::Asteroid(int difficulty, Coords Position, ScreenLimit limit) { // creates a small asteroid
+Asteroid::Asteroid(int difficulty, Coords Position) { // creates a small asteroid
 	big = false;
 	position[0] = Position;
 	speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
@@ -123,13 +124,13 @@ void Asteroid::newSpeed(int difficulty) {
 	speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
 }
 
-void Asteroid::newFrame(ScreenLimit limit, int frame) {
+void Asteroid::newFrame(int frame) {
 	if (big) {
 		for (int index = 0; index < 9; index++)
-			position[index].move(speed, frame, limit);
+			position[index].move(speed, frame);
 	}
 	else
-		position[0].move(speed, frame, limit);
+		position[0].move(speed, frame);
 }
 
 bool Asteroid::bulletCollision(Coords bulletPosition) {
@@ -148,7 +149,7 @@ bool Asteroid::bulletCollision(Coords bulletPosition) {
 	return false;
 }
 
-void Asteroid::turnSmall(int difficulty, ScreenLimit limit) {
+void Asteroid::turnSmall(int difficulty) {
 	big = false;
 	speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
 }

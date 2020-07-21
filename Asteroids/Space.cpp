@@ -9,31 +9,34 @@ void Space::nextFrame() {
 		frame = 0;
 }
 
-void Space::resetAsteroids(int difficulty, ScreenLimit limit) {
+void Space::resetAsteroids(int difficulty) {
 	int asteroidAmount;
 	switch (difficulty) {
-	case 0:
-		asteroidAmount = 7 + stage;
-		break;
-	case 1:
-		asteroidAmount = 14 + stage;
-		break;
-	case 2:
-		asteroidAmount = 21 + stage;
-		break;
-	case 3:
-		asteroidAmount = 28 + stage;
-		break;
+		case 0:
+			asteroidAmount = 7 + stage;
+			break;
+		case 1:
+			asteroidAmount = 14 + stage;
+			break;
+		case 2:
+			asteroidAmount = 21 + stage;
+			break;
+		case 3:
+			asteroidAmount = 28 + stage;
+			break;
+		default:
+			asteroidAmount = 1;
+			break;
 	}
 	asteroid.clear();
 	for (int i = 0; i < asteroidAmount; i++)
-		asteroid.push_back(Asteroid(difficulty, limit));
+		asteroid.push_back(Asteroid(difficulty));
 }
-void Space::damageAsteroid(int index, int difficulty, ScreenLimit limit) {
+void Space::damageAsteroid(int index, int difficulty) {
 	if (asteroid.at(index).isBig()) {
 		addScoreAsteroidBig(difficulty, stage);
-		asteroid.at(index).turnSmall(difficulty, limit);
-		asteroid.push_back(Asteroid(difficulty, asteroid.at(index).getPositionSmall(), limit));
+		asteroid.at(index).turnSmall(difficulty);
+		asteroid.push_back(Asteroid(difficulty, asteroid.at(index).getPositionSmall()));
 		while (asteroid.at(index).getSpeed().equalsXY(asteroid.at(asteroid.size() - 1).getSpeed()))
 			asteroid.at(asteroid.size() - 1).newSpeed(difficulty);
 	}
@@ -43,30 +46,30 @@ void Space::damageAsteroid(int index, int difficulty, ScreenLimit limit) {
 	}
 }
 
-bool Space::asteroidHitShip(ScreenLimit limit) {
-	if (ship.asteroidHitShip(asteroid, limit)) {
+bool Space::asteroidHitShip() {
+	if (ship.asteroidHitShip(asteroid)) {
 		damageShip();
 		return true;
 	}
 	return false;
 }
 
-void Space::movePrintAsteroids(ScreenLimit limit) {
+void Space::movePrintAsteroids() {
 	for (int index = 0; index < asteroid.size(); index++) {
-		asteroid.at(index).newFrame(limit, frame);
-		HUD().printAsteroid(asteroid.at(index), limit);
+		asteroid.at(index).newFrame(frame);
+		HUD().printAsteroid(asteroid.at(index));
 	}
 }
-void Space::printAsteroids(ScreenLimit limit) {
+void Space::printAsteroids() {
 	for (int index = 0; index < asteroid.size(); index++) {
-		HUD().printAsteroid(asteroid.at(index), limit);
+		HUD().printAsteroid(asteroid.at(index));
 	}
 }
 
-void Space::printBullets(ScreenLimit limit) {
+void Space::printBullets() {
 	for (int i = 0; i < ship.getMaxBullets(); i++) {
 		if (ship.bulletExists(i))
-			HUD().printBullet(ship.getBulletPosition(i), limit);
+			HUD().printBullet(ship.getBulletPosition(i));
 	}
 }
 
@@ -84,29 +87,30 @@ double Space::getFPS(clock_t refreshRate) {
 	return 1 / (((double)refreshRate) / CLOCKS_PER_SEC);
 }
 
-void Space::beforeStartGame(int difficulty, ScreenLimit limit) {
+void Space::beforeStartGame(int difficulty) {
 	char key = 'a';
 	bool showShip = false, start = false;
 	clock_t refreshRate;
 	double fps = 0;
 	int index;
-	HUD().refreshHUD(hearts, score, fps, limit);
+	ship.resetShip();
+	HUD().refreshHUD(hearts, score, fps);
 	while (!start) {
 		refreshRate = clock();
 		nextFrame();
-		HUD().refreshHUD(hearts, score, fps, limit);
-		movePrintAsteroids(limit);
-		ship.newBulletsFrame(limit);
+		HUD().refreshHUD(hearts, score, fps);
+		movePrintAsteroids();
+		ship.newBulletsFrame();
 		index = ship.bulletsHitAsteroid(asteroid);
 		if (index >= 0) {
-			damageAsteroid(index, difficulty, limit);
+			damageAsteroid(index, difficulty);
 			if (asteroid.size() == 0)
 				start = true;
 		}
-		HUD().blinkShip(ship, limit, showShip);
-		HUD().printInstructions(limit);
+		HUD().blinkShip(ship, showShip);
+		HUD().printInstructionsStart();
 		showShip = !showShip;
-		printBullets(limit);
+		printBullets();
 		if (_kbhit()) { // if key is pressed
 			key = _getch();
 			while (_kbhit())
@@ -118,7 +122,7 @@ void Space::beforeStartGame(int difficulty, ScreenLimit limit) {
 		fps = getFPS(refreshRate);
 	}
 }
-void Space::startBattle(int difficulty, ScreenLimit limit) {
+void Space::startBattle(int difficulty) {
 	clock_t refreshRate;
 	char key;
 	double fps = 0;
@@ -127,8 +131,8 @@ void Space::startBattle(int difficulty, ScreenLimit limit) {
 	while (asteroid.size() > 0 && !shipHit) {
 		refreshRate = clock();
 		nextFrame();
-		HUD().refreshHUD(hearts, score, fps, limit);
-		movePrintAsteroids(limit);
+		HUD().refreshHUD(hearts, score, fps);
+		movePrintAsteroids();
 		if (_kbhit()) { // if key is pressed
 			key = _getch();
 			switch (key) {
@@ -136,50 +140,49 @@ void Space::startBattle(int difficulty, ScreenLimit limit) {
 				ship.accelerate();
 				break;
 			case 'a':
-				ship.turnLeft(limit);
+				ship.turnLeft();
 				break;
 			case 'd':
-				ship.turnRight(limit);
+				ship.turnRight();
 				break;
 			case 'k':
-				ship.shoot(limit);
+				ship.shoot();
 				break;
 			case 'j':
-				HUD().printShip(ship, limit);
-				while (pauseGame(limit)) {
-					HUD().refreshHUD(hearts, score, fps, limit);
-					printAsteroids(limit);
-					HUD().printShip(ship, limit);
+				HUD().printShip(ship);
+				while (pauseGame()) {
+					HUD().refreshHUD(hearts, score, fps);
+					printAsteroids();
+					HUD().printShip(ship);
 				}
 				break;
 			case 'h':
-				HUD().printHelp(limit);
-				HUD().refreshHUD(hearts, score, fps, limit);
-				printAsteroids(limit);
+				HUD().printHelp();
+				HUD().refreshHUD(hearts, score, fps);
+				printAsteroids();
 				break;
 			}
 			while (_kbhit()) // loops until key is released
 				_getch();
 		}
-		ship.newFrame(frame, limit);
-		HUD().printShip(ship, limit);
-		printBullets(limit);
+		ship.newFrame(frame);
+		HUD().printShip(ship);
+		printBullets();
 		index = ship.bulletsHitAsteroid(asteroid);
 		if (index >= 0)
-			damageAsteroid(index, difficulty, limit);
-		if (asteroidHitShip(limit))
+			damageAsteroid(index, difficulty);
+		if (asteroidHitShip())
 			shipHit = true;
 		fps = getFPS(refreshRate);
 	}
-	newStage(difficulty, limit);
+	newStage(difficulty);
 }
 
-void Space::newStage(int difficulty, ScreenLimit limit) {
+void Space::newStage(int difficulty) {
 	if (asteroid.size() == 0) {
 		stage++;
 		addScoreClearAsteroids(difficulty, stage);
-		ship.resetShip(limit);
-		resetAsteroids(difficulty, limit);
+		resetAsteroids(difficulty);
 		addHeart();
 	}
 }
@@ -233,41 +236,43 @@ void Space::addScoreClearAsteroids(int difficulty, int stage) {
 	}
 }
 
-bool Space::pauseGame(ScreenLimit limit) {
+bool Space::pauseGame() {
 	char key;
-	HUD().printPause(limit);
+	HUD().printPause();
 	key = _getch();
 	if (key == 'h') {
-		HUD().printHelp(limit);
+		HUD().printHelp();
 		return true;
 	}
 	else { return false; }
 }
 
 //public:
-/*Space::Space() {
+Space::Space() {
 	ship = Ship();
 	stage = frame = score = 0;
 	hearts = 1;
-}*/
-Space::Space(int difficulty, ScreenLimit limit) {
-	int asteroidAmount;
-
-	ship = Ship(limit);
+	resetAsteroids(4);
+}
+Space::Space(int difficulty) {
+	ship = Ship();
 	stage = frame = score = 0;
 	setHearts(difficulty);
-
-	resetAsteroids(difficulty, limit);
+	resetAsteroids(difficulty);
 }
 
 
 
-void Space::game(int difficulty, ScreenLimit limit) {
-	ship = Ship(limit);
-	stage = frame = 0;
-	resetAsteroids(difficulty, limit);
+void Space::game(int difficulty) {
 	while (getHearts() > 0) {
-		beforeStartGame(difficulty, limit);
-		startBattle(difficulty, limit);
+		beforeStartGame(difficulty);
+		startBattle(difficulty);
 	}
+	
+	HUD().printDeadShip(ship);
+	HUD().printFinalScore(score);
+	HUD().printInstructionsDead();
+	char key = ' ';
+	while (key != 'j')
+		key = _getch();
 }

@@ -2,49 +2,46 @@
 
 Bullet::Bullet() {
 	existance = false;
-}
-Bullet::Bullet(ScreenLimit limit) {
-	existance = false;
-	position.setPosition(0, 0, limit);
+	position.setPosition(0, 0);
 	speed.setSpeed(0, 0);
 	remainingFrames = 0;
 }
-void Bullet::newBullet(Coords shipPosition, int facing, ScreenLimit limit) {
+void Bullet::newBullet(Coords shipPosition, int facing) {
 	// facing
 	// 7 0 1
 	// 6   2
 	// 5 4 3
 	switch (facing) {
 		case 0:
-			position.setPosition(shipPosition.getX(), shipPosition.getY() - 2, limit);
+			position.setPosition(shipPosition.getX(), shipPosition.getY() - 2);
 			speed.setSpeed(0, -1);
 			break;
 		case 1:
-			position.setPosition(shipPosition.getX() + 2, shipPosition.getY() - 2, limit);
+			position.setPosition(shipPosition.getX() + 2, shipPosition.getY() - 2);
 			speed.setSpeed(1, -1);
 			break;
 		case 2:
-			position.setPosition(shipPosition.getX() + 2, shipPosition.getY(), limit);
+			position.setPosition(shipPosition.getX() + 2, shipPosition.getY());
 			speed.setSpeed(1, 0);
 			break;
 		case 3:
-			position.setPosition(shipPosition.getX() + 2, shipPosition.getY() + 2, limit);
+			position.setPosition(shipPosition.getX() + 2, shipPosition.getY() + 2);
 			speed.setSpeed(1, 1);
 			break;
 		case 4:
-			position.setPosition(shipPosition.getX(), shipPosition.getY() + 2, limit);
+			position.setPosition(shipPosition.getX(), shipPosition.getY() + 2);
 			speed.setSpeed(0, 1);
 			break;
 		case 5:
-			position.setPosition(shipPosition.getX() - 2, shipPosition.getY() + 2, limit);
+			position.setPosition(shipPosition.getX() - 2, shipPosition.getY() + 2);
 			speed.setSpeed(-1, 1);
 			break;
 		case 6:
-			position.setPosition(shipPosition.getX() - 2, shipPosition.getY(), limit);
+			position.setPosition(shipPosition.getX() - 2, shipPosition.getY());
 			speed.setSpeed(-1, 0);
 			break;
 		case 7:
-			position.setPosition(shipPosition.getX() - 2, shipPosition.getY() - 2, limit);
+			position.setPosition(shipPosition.getX() - 2, shipPosition.getY() - 2);
 			speed.setSpeed(-1, -1);
 			break;
 	}
@@ -52,13 +49,13 @@ void Bullet::newBullet(Coords shipPosition, int facing, ScreenLimit limit) {
 	existance = true;
 }
 
-void Bullet::newFrame(ScreenLimit limit) {
+void Bullet::newFrame() {
 	if (existance) {
 		remainingFrames--;
 		if (remainingFrames <= 0)
 			existance = false;
 		else
-			position.moveBullet(speed, limit);
+			position.moveBullet(speed);
 	}
 }
 

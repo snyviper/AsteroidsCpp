@@ -4,7 +4,6 @@
 #include <vector>
 #include "Coords.h"
 #include "Bullet.h"
-#include "ScreenLimit.h"
 #include "Asteroid.h"
 
 class Ship
@@ -19,11 +18,10 @@ class Ship
 
 public:
 	Ship();
-	Ship(ScreenLimit limit);
-	void resetShip(ScreenLimit limit);
+	void resetShip();
 
-	void newFrame(int frame, ScreenLimit limit);
-	void newBulletsFrame(ScreenLimit limit);
+	void newFrame(int frame);
+	void newBulletsFrame();
 
 	int getX();
 	int getY();
@@ -33,15 +31,15 @@ public:
 	int getMaxBullets();
 	Coords getBulletPosition(int index);
 
-	void turnRight(ScreenLimit limit);
-	void turnLeft(ScreenLimit limit);
+	void turnRight();
+	void turnLeft();
 	void accelerate();
 
-	bool asteroidHitShip(std::vector<Asteroid>& asteroid, ScreenLimit limit);
+	bool asteroidHitShip(std::vector<Asteroid>& asteroid);
 
 	int bulletsHitAsteroid(std::vector<Asteroid>& asteroid);
 
-	void shoot(ScreenLimit limit);
+	void shoot();
 
 	bool bulletExists(int index);
 };

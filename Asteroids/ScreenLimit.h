@@ -4,16 +4,16 @@
 class ScreenLimit
 {
 //private:
-	unsigned int x;
-	unsigned int y;
+	static unsigned int x;
+	static unsigned int y;
 public:
 	ScreenLimit();
 	ScreenLimit(int x, int y);
-	void setLimits(int X, int Y);
-	unsigned int getSpaceX();
-	unsigned int getSpaceY();
-	unsigned int getX();
-	unsigned int getY();
+	static void setLimits(int X, int Y);
+	static unsigned int getSpaceX();
+	static unsigned int getSpaceY();
+	static unsigned int getX();
+	static unsigned int getY();
 };
 
 #endif

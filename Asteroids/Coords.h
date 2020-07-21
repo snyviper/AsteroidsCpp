@@ -1,24 +1,22 @@
 #ifndef COORDS_H
 #define COORDS_H
 
-#include "ScreenLimit.h"
-
 class Coords
 {
 //private:
 	int x;
 	int y;
 
-	void verifyLimit(ScreenLimit limit);
+	void verifyLimit();
 
 	void accNeg(int* a);
 	void accPos(int* a);
 public:
 	Coords();
-	Coords(int X, int Y, ScreenLimit limit);
-	void setPosition(int X, int Y, ScreenLimit limit);
-	void setPositionShipStart(ScreenLimit limit);
-	void setPositionScopeStart(ScreenLimit limit);
+	Coords(int X, int Y);
+	void setPosition(int X, int Y);
+	void setPositionShipStart();
+	void setPositionScopeStart();
 	void setSpeed(int X, int Y);
 	bool equalsXY(Coords position);
 
@@ -27,13 +25,13 @@ public:
 
 	//position
 
-	void moveBullet(Coords speed, ScreenLimit limit);
+	void moveBullet(Coords speed);
 
-	void move(Coords speed, int frame, ScreenLimit limit);
+	void move(Coords speed, int frame);
 
 	//scope position
-	void scopeMoveLeft(int facing, ScreenLimit limit);
-	void scopeMoveRight(int facing, ScreenLimit limit);
+	void scopeMoveLeft(int facing);
+	void scopeMoveRight(int facing);
 
 	//speed
 	void accelerate(int facing);

@@ -5,7 +5,6 @@
 #include <ctime>
 #include "Ship.h"
 #include "Asteroid.h"
-#include "ScreenLimit.h"
 
 class Space
 {
@@ -19,24 +18,24 @@ class Space
 
 	void nextFrame();
 
-	void resetAsteroids(int difficulty, ScreenLimit limit);
-	void damageAsteroid(int index, int difficulty, ScreenLimit limit);
+	void resetAsteroids(int difficulty);
+	void damageAsteroid(int index, int difficulty);
 
-	bool asteroidHitShip(ScreenLimit limit);
+	bool asteroidHitShip();
 
-	void movePrintAsteroids(ScreenLimit limit);
-	void printAsteroids(ScreenLimit limit);
+	void movePrintAsteroids();
+	void printAsteroids();
 
-	void printBullets(ScreenLimit limit);
+	void printBullets();
 
 	void damageShip();
 
 	double getFPS(clock_t refreshRate);
 
-	void beforeStartGame(int difficulty, ScreenLimit limit);
-	void startBattle(int difficulty, ScreenLimit limit);
+	void beforeStartGame(int difficulty);
+	void startBattle(int difficulty);
 
-	void newStage(int difficulty, ScreenLimit limit);
+	void newStage(int difficulty);
 
 	void setHearts(int difficulty);
 	int getHearts();
@@ -47,13 +46,13 @@ class Space
 	void addScoreAsteroidBig(int difficulty, int stage);
 	void addScoreClearAsteroids(int difficulty, int stage);
 
-	bool pauseGame(ScreenLimit limit);
+	bool pauseGame();
 
 public:
-	//Space();
-	Space(int difficulty, ScreenLimit limit);
+	Space();
+	Space(int difficulty);
 
-	void game(int difficulty, ScreenLimit limit);
+	void game(int difficulty);
 };
 
 #endif

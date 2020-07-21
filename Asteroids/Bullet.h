@@ -2,7 +2,6 @@
 #define BULLET_H
 
 #include "Coords.h"
-#include "ScreenLimit.h"
 
 class Bullet
 {
@@ -14,10 +13,9 @@ class Bullet
 
 public:
 	Bullet();
-	Bullet(ScreenLimit limit);
-	void newBullet(Coords shipPosition, int facing, ScreenLimit limit);
+	void newBullet(Coords shipPosition, int facing);
 
-	void newFrame(ScreenLimit limit);
+	void newFrame();
 
 	bool hitAsteroid(Coords positionAsteroid);
 

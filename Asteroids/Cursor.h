@@ -2,7 +2,6 @@
 #define CURSOR_H
 
 #include <Windows.h>
-#include "ScreenLimit.h"
 
 class Cursor
 {
@@ -11,49 +10,51 @@ class Cursor
 
 public:
     Cursor();
-    void goToXY(unsigned int x, unsigned int y, ScreenLimit limit);
-    void goToShipStart(ScreenLimit limit);
-    void goToScopeStart(ScreenLimit limit);
-    void goToInstruction(ScreenLimit limit);
-    void goToInstruction2(ScreenLimit limit);
+    void goToXY(unsigned int x, unsigned int y);
+    void goToShipStart();
+    void goToScopeStart();
+    void goToInstructionHitJ();
+    void goToInstructionToStart();
+    void goToInstructionToExit();
+    void goToFinalScore(int figures);
     void goToHealth();
     void goToHearts();
-    void goToScoreWord(int figures, ScreenLimit limit);
-    void goToScoreValue(int figures, ScreenLimit limit);
-    void goToFPS(ScreenLimit limit);
-    void goToFPSName(ScreenLimit limit);
+    void goToScoreWord(int figures);
+    void goToScoreValue(int figures);
+    void goToFPS();
+    void goToFPSName();
     void goToTopBorder();
-    void goToBottomBorder(ScreenLimit limit);
+    void goToBottomBorder();
     void goToSpace();
-    void goToTitle(ScreenLimit limit);
-    void goToNewGame(ScreenLimit limit);
-    void goToExit(ScreenLimit limit);
-    void goToArrowNewGame(ScreenLimit limit);
-    void goToArrowExit(ScreenLimit limit);
-    void goToHelpTop(ScreenLimit limit);
-    void goToHelpMiddle(ScreenLimit limit);
-    void goToHelpBottom(ScreenLimit limit);
+    void goToTitle();
+    void goToNewGame();
+    void goToExit();
+    void goToArrowNewGame();
+    void goToArrowExit();
+    void goToHelpTop();
+    void goToHelpMiddle();
+    void goToHelpBottom();
 
-    void goToSelectDifficulty(ScreenLimit limit);
-    void goToDifficultyEasy(ScreenLimit limit);
-    void goToDifficultyNormal(ScreenLimit limit);
-    void goToDifficultyHard(ScreenLimit limit);
-    void goToDifficultyExtreme(ScreenLimit limit);
-    void goToDifficultyBack(ScreenLimit limit);
-    void goToDifficultyArrowEasy(ScreenLimit limit);
-    void goToDifficultyArrowNormal(ScreenLimit limit);
-    void goToDifficultyArrowHard(ScreenLimit limit);
-    void goToDifficultyArrowExtreme(ScreenLimit limit);
-    void goToDifficultyArrowBack(ScreenLimit limit);
+    void goToSelectDifficulty();
+    void goToDifficultyEasy();
+    void goToDifficultyNormal();
+    void goToDifficultyHard();
+    void goToDifficultyExtreme();
+    void goToDifficultyBack();
+    void goToDifficultyArrowEasy();
+    void goToDifficultyArrowNormal();
+    void goToDifficultyArrowHard();
+    void goToDifficultyArrowExtreme();
+    void goToDifficultyArrowBack();
 
-    void goToPaused(ScreenLimit limit);
+    void goToPaused();
 
-    void goToHelpW(ScreenLimit limit);
-    void goToHelpA(ScreenLimit limit);
-    void goToHelpS(ScreenLimit limit);
-    void goToHelpD(ScreenLimit limit);
-    void goToHelpJ(ScreenLimit limit);
-    void goToHelpK(ScreenLimit limit);
+    void goToHelpW();
+    void goToHelpA();
+    void goToHelpS();
+    void goToHelpD();
+    void goToHelpJ();
+    void goToHelpK();
 };
 
 #endif

@@ -2,7 +2,6 @@
 #define HUD_H
 
 #include "Cursor.h"
-#include "ScreenLimit.h"
 #include "Ship.h"
 #include "Asteroid.h"
 
@@ -17,54 +16,59 @@ class HUD
 
 	static void printHealth(int hearts);
 	static void printHearts(int hearts);
-	static void printTopBorder(ScreenLimit limit);
-	static void printScoreWord(int score, ScreenLimit limit);
-	static void printFPSName(double fps, ScreenLimit limit);
-	static void printBottomBorder(ScreenLimit limit);
+	static void printTopBorder();
+	static void printScoreWord(int score);
+	static void printFPSName(double fps);
+	static void printBottomBorder();
 
-	static void printTitle(ScreenLimit limit);
-	static void printNewGame(ScreenLimit limit);
-	static void printExit(ScreenLimit limit);
+	static void printTitle();
+	static void printNewGame();
+	static void printExit();
 
 public:
 	HUD();
 
-	static void printMainScreen(ScreenLimit limit);
-	static void printArrowNewGame(ScreenLimit limit);
-	static void unprintArrowNewGame(ScreenLimit limit);
-	static void printArrowExit(ScreenLimit limit);
-	static void unprintArrowExit(ScreenLimit limit);
+	static void printMainScreen();
+	static void printArrowNewGame();
+	static void unprintArrowNewGame();
+	static void printArrowExit();
+	static void unprintArrowExit();
 
-	static void printDifficultySelection(ScreenLimit limit);
-	static void printDifficultyArrowEasy(ScreenLimit limit);
-	static void unprintDifficultyArrowEasy(ScreenLimit limit);
-	static void printDifficultyArrowNormal(ScreenLimit limit);
-	static void unprintDifficultyArrowNormal(ScreenLimit limit);
-	static void printDifficultyArrowHard(ScreenLimit limit);
-	static void unprintDifficultyArrowHard(ScreenLimit limit);
-	static void printDifficultyArrowExtreme(ScreenLimit limit);
-	static void unprintDifficultyArrowExtreme(ScreenLimit limit);
-	static void printDifficultyArrowBack(ScreenLimit limit);
-	static void unprintDifficultyArrowBack(ScreenLimit limit);
+	static void printDifficultySelection();
+	static void printDifficultyArrowEasy();
+	static void unprintDifficultyArrowEasy();
+	static void printDifficultyArrowNormal();
+	static void unprintDifficultyArrowNormal();
+	static void printDifficultyArrowHard();
+	static void unprintDifficultyArrowHard();
+	static void printDifficultyArrowExtreme();
+	static void unprintDifficultyArrowExtreme();
+	static void printDifficultyArrowBack();
+	static void unprintDifficultyArrowBack();
 
-	static void blinkShip(Ship ship, ScreenLimit limit, bool visible);
-	static void printShip(Ship ship, ScreenLimit limit);
-	static void printBullet(Coords bulletPosition, ScreenLimit limit);
-	static void printAsteroid(Asteroid asteroid, ScreenLimit limit);
+	static void blinkShip(Ship ship, bool visible);
+	static void printShip(Ship ship);
+	static void printBullet(Coords bulletPosition);
+	static void printAsteroid(Asteroid asteroid);
 
-	static void printInstructions(ScreenLimit limit);
+	static void printInstructionsStart();
 
-	static void refreshHUD(int hearts, int score, double fps, ScreenLimit limit);
+	static void printDeadShip(Ship ship);
+	static void printFinalScore(int score);
+
+	static void printInstructionsDead();
+
+	static void refreshHUD(int hearts, int score, double fps);
 	static void cleanScreen();
-	static void startMainScreen(ScreenLimit limit);
+	static void startMainScreen();
 
-	static void printScoreValue(int score, ScreenLimit limit);
-	static void printFPS(double fps, ScreenLimit limit);
+	static void printScoreValue(int score);
+	static void printFPS(double fps);
 
-	static void printHelp(ScreenLimit limit);
-	static void printHelpIcon(ScreenLimit limit);
+	static void printHelp();
+	static void printHelpIcon();
 
-	static void printPause(ScreenLimit limit);
+	static void printPause();
 };
 
 #endif

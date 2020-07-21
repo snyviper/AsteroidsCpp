@@ -2,7 +2,6 @@
 #define ASTEROID_H
 
 #include "Coords.h"
-#include "ScreenLimit.h"
 
 class Asteroid
 {
@@ -20,16 +19,16 @@ class Asteroid
 
 public:
 	Asteroid();
-	Asteroid(int difficulty, ScreenLimit limit);
-	Asteroid(int difficulty, Coords Position, ScreenLimit limit);
+	Asteroid(int difficulty);
+	Asteroid(int difficulty, Coords Position);
 
 	void newSpeed(int difficulty);
 
-	void newFrame(ScreenLimit limit, int frame);
+	void newFrame(int frame);
 
 	bool bulletCollision(Coords bulletPosition);
 
-	void turnSmall(int difficulty, ScreenLimit limit);
+	void turnSmall(int difficulty);
 
 	int getX();
 	int getY();

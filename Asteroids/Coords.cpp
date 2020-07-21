@@ -1,10 +1,11 @@
 #include "Coords.h"
+#include "ScreenLimit.h"
 
-void Coords::verifyLimit(ScreenLimit limit) {
-	if (x < 0) { x += limit.getSpaceX(); }
-	if (y < 0) { y += limit.getSpaceY(); }
-	if (x >= limit.getSpaceX()) { x -= limit.getSpaceX(); }
-	if (y >= limit.getSpaceY()) { y -= limit.getSpaceY(); }
+void Coords::verifyLimit() {
+	if (x < 0) { x += ScreenLimit().getSpaceX(); }
+	if (y < 0) { y += ScreenLimit().getSpaceY(); }
+	if (x >= ScreenLimit().getSpaceX()) { x -= ScreenLimit().getSpaceX(); }
+	if (y >= ScreenLimit().getSpaceY()) { y -= ScreenLimit().getSpaceY(); }
 }
 
 void Coords::accNeg(int* a) {
@@ -80,23 +81,23 @@ Coords::Coords() {
 	x = 0;
 	y = 0;
 }
-Coords::Coords(int X, int Y, ScreenLimit limit) {
+Coords::Coords(int X, int Y) {
 	x = X;
 	y = Y;
-	verifyLimit(limit);
+	verifyLimit();
 }
-void Coords::setPosition(int X, int Y, ScreenLimit limit) {
+void Coords::setPosition(int X, int Y) {
 	x = X;
 	y = Y;
-	verifyLimit(limit);
+	verifyLimit();
 }
-void Coords::setPositionShipStart(ScreenLimit limit) {
-	x = limit.getSpaceX() / 2;
-	y = limit.getSpaceY() / 2;
+void Coords::setPositionShipStart() {
+	x = ScreenLimit().getSpaceX() / 2;
+	y = ScreenLimit().getSpaceY() / 2;
 }
-void Coords::setPositionScopeStart(ScreenLimit limit) {
-	x = limit.getSpaceX() / 2;
-	y = (limit.getSpaceY() / 2) - 1;
+void Coords::setPositionScopeStart() {
+	x = ScreenLimit().getSpaceX() / 2;
+	y = (ScreenLimit().getSpaceY() / 2) - 1;
 }
 void Coords::setSpeed(int X, int Y) {
 	x = X;
@@ -111,13 +112,13 @@ short Coords::getY() { return y; }
 
 //position
 
-void Coords::moveBullet(Coords speed, ScreenLimit limit) {
+void Coords::moveBullet(Coords speed) {
 	x += speed.x;
 	y += speed.y;
-	verifyLimit(limit);
+	verifyLimit();
 }
 
-void Coords::move(Coords speed, int frame, ScreenLimit limit) {
+void Coords::move(Coords speed, int frame) {
 	if (speed.getX() != 0 && frame % speed.getX() == 0) {
 		if (speed.getX() > 0)
 			x++;
@@ -130,11 +131,11 @@ void Coords::move(Coords speed, int frame, ScreenLimit limit) {
 		else
 			y--;
 	}
-	verifyLimit(limit);
+	verifyLimit();
 }
 
 //scope position
-void Coords::scopeMoveLeft(int facing, ScreenLimit limit) {
+void Coords::scopeMoveLeft(int facing) {
 	// facing
 	// 7 0 1
 	// 6   2
@@ -165,9 +166,9 @@ void Coords::scopeMoveLeft(int facing, ScreenLimit limit) {
 			x -= 1;
 			break;
 	}
-	verifyLimit(limit);
+	verifyLimit();
 }
-void Coords::scopeMoveRight(int facing, ScreenLimit limit) {
+void Coords::scopeMoveRight(int facing) {
 	// facing
 	// 7 0 1
 	// 6   2
@@ -198,7 +199,7 @@ void Coords::scopeMoveRight(int facing, ScreenLimit limit) {
 			y -= 1;
 			break;
 	}
-	verifyLimit(limit);
+	verifyLimit();
 }
 
 //speed

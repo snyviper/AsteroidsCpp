@@ -1,10 +1,9 @@
 // Este arquivo contém a função 'main'. A execução do programa começa e termina aqui.
 
-#include <iostream>
 #include <conio.h>
-#include <Windows.h>
 #include "Space.h"
 #include "HUD.h"
+#include "ScreenLimit.h"
 
 void showConsoleCursor(bool showFlag)
 {
@@ -20,127 +19,135 @@ int main()
 	char key;
 	bool exit = false;
 	showConsoleCursor(false);
-	ScreenLimit limit(128, 45);
-	Space space(1, limit);
+	ScreenLimit(128, 45);
+	Space space;
 	int arrowMainScreen = 0;
 	int arrowDifficulty;
 	bool exitDifficulty;
-	HUD().printMainScreen(limit);
+	HUD().printMainScreen();
 	while (!exit) {
 		switch (arrowMainScreen) {
 			case 0:
-				HUD().printArrowNewGame(limit);
+				HUD().printArrowNewGame();
 				key = _getch();
 				switch (key) {
 					case 's': // down arrow
-						HUD().unprintArrowNewGame(limit);
+						HUD().unprintArrowNewGame();
 						arrowMainScreen = 1;
 						break;
 					case 'j': // select difficulty
 						arrowDifficulty = 1;
 						exitDifficulty = false;
-						HUD().printDifficultySelection(limit);
+						HUD().printDifficultySelection();
 						while (!exitDifficulty) {
 							switch (arrowDifficulty) {
 								case 0: // easy
-									HUD().printDifficultyArrowEasy(limit);
+									HUD().printDifficultyArrowEasy();
 									key = _getch();
 									switch (key) {
 										case 's': // go down
-											HUD().unprintDifficultyArrowEasy(limit);
+											HUD().unprintDifficultyArrowEasy();
 											arrowDifficulty++;
 											break;
 										case 'j': // start game
-											space.game(arrowDifficulty, limit);
-											HUD().printDifficultySelection(limit);
+											space = Space(arrowDifficulty);
+											space.game(arrowDifficulty);
+											exitDifficulty = true;
+											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
-											HUD().printHelp(limit);
-											HUD().printDifficultySelection(limit);
+											HUD().printHelp();
+											HUD().printDifficultySelection();
 											break;
 									}
 									break;
 								case 1: // normal
-									HUD().printDifficultyArrowNormal(limit);
+									HUD().printDifficultyArrowNormal();
 									key = _getch();
 									switch (key) {
 										case 'w': // go up
-											HUD().unprintDifficultyArrowNormal(limit);
+											HUD().unprintDifficultyArrowNormal();
 											arrowDifficulty--;
 											break;
 										case 's': // go down
-											HUD().unprintDifficultyArrowNormal(limit);
+											HUD().unprintDifficultyArrowNormal();
 											arrowDifficulty++;
 											break;
 										case 'j': // start game
-											space.game(arrowDifficulty, limit);
-											HUD().printDifficultySelection(limit);
+											space = Space(arrowDifficulty);
+											space.game(arrowDifficulty);
+											exitDifficulty = true;
+											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
-											HUD().printHelp(limit);
-											HUD().printDifficultySelection(limit);
+											HUD().printHelp();
+											HUD().printDifficultySelection();
 											break;
 									}
 									break;
 								case 2: // hard
-									HUD().printDifficultyArrowHard(limit);
+									HUD().printDifficultyArrowHard();
 									key = _getch();
 									switch (key) {
 										case 'w': // go up
-											HUD().unprintDifficultyArrowHard(limit);
+											HUD().unprintDifficultyArrowHard();
 											arrowDifficulty--;
 											break;
 										case 's': // go down
-											HUD().unprintDifficultyArrowHard(limit);
+											HUD().unprintDifficultyArrowHard();
 											arrowDifficulty++;
 											break;
 										case 'j': // start game
-											space.game(arrowDifficulty, limit);
-											HUD().printDifficultySelection(limit);
+											space = Space(arrowDifficulty);
+											space.game(arrowDifficulty);
+											exitDifficulty = true;
+											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
-											HUD().printHelp(limit);
-											HUD().printDifficultySelection(limit);
+											HUD().printHelp();
+											HUD().printDifficultySelection();
 											break;
 									}
 									break;
 								case 3: // extreme
-									HUD().printDifficultyArrowExtreme(limit);
+									HUD().printDifficultyArrowExtreme();
 									key = _getch();
 									switch (key) {
 										case 'w': // go up
-											HUD().unprintDifficultyArrowExtreme(limit);
+											HUD().unprintDifficultyArrowExtreme();
 											arrowDifficulty--;
 											break;
 										case 's': // go down
-											HUD().unprintDifficultyArrowExtreme(limit);
+											HUD().unprintDifficultyArrowExtreme();
 											arrowDifficulty++;
 											break;
 										case 'j': // start game
-											space.game(arrowDifficulty, limit);
-											HUD().printDifficultySelection(limit);
+											space = Space(arrowDifficulty);
+											space.game(arrowDifficulty);
+											exitDifficulty = true;
+											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
-											HUD().printHelp(limit);
-											HUD().printDifficultySelection(limit);
+											HUD().printHelp();
+											HUD().printDifficultySelection();
 											break;
 									}
 									break;
 								case 4: // back
-									HUD().printDifficultyArrowBack(limit);
+									HUD().printDifficultyArrowBack();
 									key = _getch();
 									switch (key) {
 										case 'w': // go up
-											HUD().unprintDifficultyArrowBack(limit);
+											HUD().unprintDifficultyArrowBack();
 											arrowDifficulty--;
 											break;
 										case 'j': // go back
 											exitDifficulty = true;
-											HUD().printMainScreen(limit);
+											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
-											HUD().printHelp(limit);
-											HUD().printDifficultySelection(limit);
+											HUD().printHelp();
+											HUD().printDifficultySelection();
 											break;
 									}
 									break;
@@ -148,25 +155,25 @@ int main()
 						}
 						break;
 					case 'h': // show help page
-						HUD().printHelp(limit);
-						HUD().printMainScreen(limit);
+						HUD().printHelp();
+						HUD().printMainScreen();
 						break;
 				}
 				break;
 			case 1:
-				HUD().printArrowExit(limit);
+				HUD().printArrowExit();
 				key = _getch();
 				switch (key) {
 					case 'w': // up arrow
-						HUD().unprintArrowExit(limit);
+						HUD().unprintArrowExit();
 						arrowMainScreen = 0;
 						break;
 					case 'j': // exit
 						exit = true;
 						break;
 					case 'h': // show help page
-						HUD().printHelp(limit);
-						HUD().printMainScreen(limit);
+						HUD().printHelp();
+						HUD().printMainScreen();
 						break;
 				}
 				break;
