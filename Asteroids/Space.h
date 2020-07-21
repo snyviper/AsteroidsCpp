@@ -5,8 +5,9 @@
 #include <ctime>
 #include "Ship.h"
 #include "Asteroid.h"
+#include "Sounds.h"
 
-class Space
+class Space : Sounds
 {
 //private
 	int frame;

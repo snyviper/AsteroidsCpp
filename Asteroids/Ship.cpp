@@ -1,5 +1,9 @@
 #include "Ship.h"
+#include <Windows.h>
+#include <string>
+#include <thread>
 
+//public:
 Ship::Ship() {
 	resetShip();
 	for (int index = 0; index < MAX_BULLETS; index++) {
@@ -55,45 +59,54 @@ bool Ship::asteroidHitShip(std::vector<Asteroid>& asteroid) {
 		if (asteroid.at(i).isBig()) {
 			for (int j = 0; j < 9; j++) {
 				if (position.equalsXY(asteroid.at(i).getPositionBig()[j])) {
-					//resetShip();
+					std::thread tPlayShipExplosionSound(playShipExplosionSound);
+					tPlayShipExplosionSound.detach();
 					return true;
 				}
 			}
 		}
 		else {
 			if (position.equalsXY(asteroid.at(i).getPositionSmall())) {
-				//resetShip();
+				std::thread tPlayShipExplosionSound(playShipExplosionSound);
+				tPlayShipExplosionSound.detach();
 				return true;
 			}
 		}
 	}
 	return false;
 }
-
 int Ship::bulletsHitAsteroid(std::vector<Asteroid>& asteroid) {
 	for (int i = 0; i < MAX_BULLETS; i++) {
 		if (bullet[i].exists()) {
 			for (int j = 0; j < asteroid.size(); j++) {
 				if (asteroid.at(j).isBig()) {
 					for (int k = 0; k < 9; k++) {
-						if (bullet[i].hitAsteroid(asteroid.at(j).getPositionBig()[k]))
+						if (bullet[i].hitAsteroid(asteroid.at(j).getPositionBig()[k])) {
+							std::thread tPlayAsteroidExplosionSound(playAsteroidExplosionSound);
+							tPlayAsteroidExplosionSound.detach();
 							return j;
+						}
 					}
 				}
 				else {
-					if (bullet[i].hitAsteroid(asteroid.at(j).getPositionSmall()))
+					if (bullet[i].hitAsteroid(asteroid.at(j).getPositionSmall())) {
+						std::thread tPlayAsteroidExplosionEffect(playAsteroidExplosionSound);
+						tPlayAsteroidExplosionEffect.detach();
 						return j;
+					}
 				}
 			}
 		}
 	}
 	return -1;
 }
-
 void Ship::shoot() {
 	for (int index = 0; index < MAX_BULLETS; index++) {
 		if (!bullet[index].exists()) {
 			bullet[index].newBullet(position, facing);
+			//create thread
+			std::thread tPlayShipGunSoundEffect(playGunSound);
+			tPlayShipGunSoundEffect.detach();
 			break;
 		}
 	}

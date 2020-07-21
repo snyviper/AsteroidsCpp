@@ -4,6 +4,7 @@
 #include "Space.h"
 #include "HUD.h"
 #include "ScreenLimit.h"
+#include "Sounds.h"
 
 void showConsoleCursor(bool showFlag)
 {
@@ -34,10 +35,12 @@ int main()
 					case 's': // down arrow
 						HUD().unprintArrowNewGame();
 						arrowMainScreen = 1;
+						Sounds().playMenuSelectSound();
 						break;
 					case 'j': // select difficulty
 						arrowDifficulty = 1;
 						exitDifficulty = false;
+						Sounds().playMenuHitSound();
 						HUD().printDifficultySelection();
 						while (!exitDifficulty) {
 							switch (arrowDifficulty) {
@@ -48,9 +51,11 @@ int main()
 										case 's': // go down
 											HUD().unprintDifficultyArrowEasy();
 											arrowDifficulty++;
+											Sounds().playMenuSelectSound();
 											break;
 										case 'j': // start game
 											space = Space(arrowDifficulty);
+											Sounds().playMenuHitSound();
 											space.game(arrowDifficulty);
 											exitDifficulty = true;
 											HUD().printMainScreen();
@@ -68,13 +73,16 @@ int main()
 										case 'w': // go up
 											HUD().unprintDifficultyArrowNormal();
 											arrowDifficulty--;
+											Sounds().playMenuSelectSound();
 											break;
 										case 's': // go down
 											HUD().unprintDifficultyArrowNormal();
 											arrowDifficulty++;
+											Sounds().playMenuSelectSound();
 											break;
 										case 'j': // start game
 											space = Space(arrowDifficulty);
+											Sounds().playMenuHitSound();
 											space.game(arrowDifficulty);
 											exitDifficulty = true;
 											HUD().printMainScreen();
@@ -92,13 +100,16 @@ int main()
 										case 'w': // go up
 											HUD().unprintDifficultyArrowHard();
 											arrowDifficulty--;
+											Sounds().playMenuSelectSound();
 											break;
 										case 's': // go down
 											HUD().unprintDifficultyArrowHard();
 											arrowDifficulty++;
+											Sounds().playMenuSelectSound();
 											break;
 										case 'j': // start game
 											space = Space(arrowDifficulty);
+											Sounds().playMenuHitSound();
 											space.game(arrowDifficulty);
 											exitDifficulty = true;
 											HUD().printMainScreen();
@@ -116,13 +127,16 @@ int main()
 										case 'w': // go up
 											HUD().unprintDifficultyArrowExtreme();
 											arrowDifficulty--;
+											Sounds().playMenuSelectSound();
 											break;
 										case 's': // go down
 											HUD().unprintDifficultyArrowExtreme();
 											arrowDifficulty++;
+											Sounds().playMenuSelectSound();
 											break;
 										case 'j': // start game
 											space = Space(arrowDifficulty);
+											Sounds().playMenuHitSound();
 											space.game(arrowDifficulty);
 											exitDifficulty = true;
 											HUD().printMainScreen();
@@ -140,10 +154,12 @@ int main()
 										case 'w': // go up
 											HUD().unprintDifficultyArrowBack();
 											arrowDifficulty--;
+											Sounds().playMenuSelectSound();
 											break;
 										case 'j': // go back
 											exitDifficulty = true;
 											HUD().printMainScreen();
+											Sounds().playMenuBackSound();
 											break;
 										case 'h': // show help page
 											HUD().printHelp();
@@ -167,9 +183,11 @@ int main()
 					case 'w': // up arrow
 						HUD().unprintArrowExit();
 						arrowMainScreen = 0;
+						Sounds().playMenuSelectSound();
 						break;
 					case 'j': // exit
 						exit = true;
+						Sounds().playMenuExitSound();
 						break;
 					case 'h': // show help page
 						HUD().printHelp();

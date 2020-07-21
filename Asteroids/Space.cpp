@@ -180,6 +180,7 @@ void Space::startBattle(int difficulty) {
 
 void Space::newStage(int difficulty) {
 	if (asteroid.size() == 0) {
+		playStageCompletedSound();
 		stage++;
 		addScoreClearAsteroids(difficulty, stage);
 		resetAsteroids(difficulty);
@@ -268,8 +269,8 @@ void Space::game(int difficulty) {
 		beforeStartGame(difficulty);
 		startBattle(difficulty);
 	}
-	
 	HUD().printDeadShip(ship);
+	playGameOverSound();
 	HUD().printFinalScore(score);
 	HUD().printInstructionsDead();
 	char key = ' ';

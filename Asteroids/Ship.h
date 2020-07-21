@@ -5,8 +5,9 @@
 #include "Coords.h"
 #include "Bullet.h"
 #include "Asteroid.h"
+#include "Sounds.h"
 
-class Ship
+class Ship : Sounds
 {
 //private:
 	Coords scopePosition;
@@ -36,9 +37,7 @@ public:
 	void accelerate();
 
 	bool asteroidHitShip(std::vector<Asteroid>& asteroid);
-
 	int bulletsHitAsteroid(std::vector<Asteroid>& asteroid);
-
 	void shoot();
 
 	bool bulletExists(int index);
