@@ -14,6 +14,8 @@ public:
 	static void playShipExplosionSound();
 	static void playAsteroidExplosionSound();
 	static void playGunSound();
+	static void playPauseSound();
+	static void playHelpSound();
 
 	static void playGameOverSound();
 	static void playStageCompletedSound();

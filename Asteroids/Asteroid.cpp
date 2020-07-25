@@ -133,46 +133,13 @@ void Asteroid::newFrame(int frame) {
 		position[0].move(speed, frame);
 }
 
-bool Asteroid::bulletCollision(Coords bulletPosition) {
-	if (big) {
-		for (int index = 0; index < 9; index++) {
-			if (position[index].getX() == bulletPosition.getX() && position[index].getY() == bulletPosition.getY()) {
-				return true;
-			}
-		}
-	}
-	else {
-		if (position[0].getX() == bulletPosition.getX() && position[0].getY() == bulletPosition.getY()) {
-			return true;
-		}
-	}
-	return false;
-}
-
 void Asteroid::turnSmall(int difficulty) {
 	big = false;
+	position[0].plusOneXY();
 	speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
 }
 
-int Asteroid::getX() {
-	if (big)
-		return position[4].getX();
-	else
-		return position[0].getX();
-}
-int Asteroid::getY() {
-	if (big)
-		return position[4].getY();
-	else
-		return position[0].getY();
-}
 bool Asteroid::isBig() { return big; }
-Coords Asteroid::getPositionSmall() {
-	return position[0];
-}
-Coords* Asteroid::getPositionBig() {
-	return position;
-}
-Coords Asteroid::getSpeed() {
-	return speed;
-}
+Coords Asteroid::getPositionSmall() { return position[0]; }
+Coords* Asteroid::getPositionBig() { return position; }
+Coords Asteroid::getSpeed() { return speed; }

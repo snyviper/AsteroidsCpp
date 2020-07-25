@@ -103,7 +103,7 @@ void Coords::setSpeed(int X, int Y) {
 	x = X;
 	y = Y;
 }
-bool Coords::equalsXY(Coords position) {
+bool Coords::equals(Coords position) {
 	return x == position.getX() && y == position.getY();
 }
 
@@ -111,6 +111,10 @@ short Coords::getX() { return x; }
 short Coords::getY() { return y; }
 
 //position
+
+void Coords::plusOneXY() {
+	setPosition(x + 1, y + 1);
+}
 
 void Coords::moveBullet(Coords speed) {
 	x += speed.x;

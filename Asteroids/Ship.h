@@ -24,13 +24,11 @@ public:
 	void newFrame(int frame);
 	void newBulletsFrame();
 
-	int getX();
-	int getY();
-	int getScopeX();
-	int getScopeY();
+	Coords getPosition();
+	Coords getScopePosition();
 	int getFacing();
 	int getMaxBullets();
-	Coords getBulletPosition(int index);
+	Bullet getBullet(int index);
 
 	void turnRight();
 	void turnLeft();

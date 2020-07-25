@@ -2,6 +2,7 @@
 #define CURSOR_H
 
 #include <Windows.h>
+#include "Coords.h"
 
 class Cursor
 {
@@ -11,6 +12,7 @@ class Cursor
 public:
     Cursor();
     void goToXY(unsigned int x, unsigned int y);
+    void goToPosition(Coords position);
     void goToShipStart();
     void goToScopeStart();
     void goToInstructionHitJ();

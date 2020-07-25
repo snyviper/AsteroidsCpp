@@ -18,12 +18,14 @@ public:
 	void setPositionShipStart();
 	void setPositionScopeStart();
 	void setSpeed(int X, int Y);
-	bool equalsXY(Coords position);
+	bool equals(Coords position);
 
 	short getX();
 	short getY();
 
 	//position
+
+	void plusOneXY();
 
 	void moveBullet(Coords speed);
 

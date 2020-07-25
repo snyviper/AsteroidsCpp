@@ -1,15 +1,17 @@
 #include "ScreenLimit.h"
 
+//private:
 unsigned int ScreenLimit::x = 100;
 unsigned int ScreenLimit::y = 25;
 
+//public:
 ScreenLimit::ScreenLimit() {}
 ScreenLimit::ScreenLimit(int X, int Y){
 	setLimits(X, Y);
 }
 
 void ScreenLimit::setLimits(int X, int Y) {
-	if (X >= 25 && Y >= 8) {
+	if (X >= 30 && Y >= 10) {
 		x = X;
 		y = Y;
 	}

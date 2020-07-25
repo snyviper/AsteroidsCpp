@@ -61,6 +61,7 @@ int main()
 											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
+											Sounds().playHelpSound();
 											HUD().printHelp();
 											HUD().printDifficultySelection();
 											break;
@@ -88,6 +89,7 @@ int main()
 											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
+											Sounds().playHelpSound();
 											HUD().printHelp();
 											HUD().printDifficultySelection();
 											break;
@@ -115,6 +117,7 @@ int main()
 											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
+											Sounds().playHelpSound();
 											HUD().printHelp();
 											HUD().printDifficultySelection();
 											break;
@@ -142,6 +145,7 @@ int main()
 											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
+											Sounds().playHelpSound();
 											HUD().printHelp();
 											HUD().printDifficultySelection();
 											break;
@@ -162,6 +166,7 @@ int main()
 											Sounds().playMenuBackSound();
 											break;
 										case 'h': // show help page
+											Sounds().playHelpSound();
 											HUD().printHelp();
 											HUD().printDifficultySelection();
 											break;
@@ -171,6 +176,7 @@ int main()
 						}
 						break;
 					case 'h': // show help page
+						Sounds().playHelpSound();
 						HUD().printHelp();
 						HUD().printMainScreen();
 						break;
@@ -190,6 +196,7 @@ int main()
 						Sounds().playMenuExitSound();
 						break;
 					case 'h': // show help page
+						Sounds().playHelpSound();
 						HUD().printHelp();
 						HUD().printMainScreen();
 						break;

@@ -47,7 +47,7 @@ class Space : Sounds
 	void addScoreAsteroidBig(int difficulty, int stage);
 	void addScoreClearAsteroids(int difficulty, int stage);
 
-	bool pauseGame();
+	void pauseGame(double fps);
 
 public:
 	Space();

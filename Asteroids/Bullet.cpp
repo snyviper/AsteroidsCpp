@@ -60,7 +60,7 @@ void Bullet::newFrame() {
 }
 
 bool Bullet::hitAsteroid(Coords positionAsteroid) {
-	if (position.equalsXY(positionAsteroid)) {
+	if (position.equals(positionAsteroid)) {
 		existance = false;
 		remainingFrames = 0;
 		return true;
@@ -69,6 +69,4 @@ bool Bullet::hitAsteroid(Coords positionAsteroid) {
 }
 
 bool Bullet::exists() { return existance; }
-int Bullet::getX() { return position.getX(); }
-int Bullet::getY() { return position.getY(); }
 Coords Bullet::getPosition(){ return position; }

@@ -46,9 +46,9 @@ public:
 	static void printDifficultyArrowBack();
 	static void unprintDifficultyArrowBack();
 
-	static void blinkShip(Ship ship, bool visible);
+	static void blinkShip(Ship ship, bool* visible);
 	static void printShip(Ship ship);
-	static void printBullet(Coords bulletPosition);
+	static void printBullet(Bullet bullet);
 	static void printAsteroid(Asteroid asteroid);
 
 	static void printInstructionsStart();
@@ -59,7 +59,6 @@ public:
 	static void printInstructionsDead();
 
 	static void refreshHUD(int hearts, int score, double fps);
-	static void cleanScreen();
 	static void startMainScreen();
 
 	static void printScoreValue(int score);

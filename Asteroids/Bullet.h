@@ -20,8 +20,6 @@ public:
 	bool hitAsteroid(Coords positionAsteroid);
 
 	bool exists();
-	int getX();
-	int getY();
 	Coords getPosition();
 };
 

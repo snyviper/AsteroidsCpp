@@ -28,14 +28,12 @@ void Ship::newBulletsFrame() {
 	}
 }
 
-int Ship::getX() { return position.getX(); }
-int Ship::getY() { return position.getY(); }
-int Ship::getScopeX() { return scopePosition.getX(); }
-int Ship::getScopeY() { return scopePosition.getY(); }
+Coords Ship::getPosition() { return position; }
+Coords Ship::getScopePosition() { return scopePosition; }
 int Ship::getFacing() { return facing; }
 int Ship::getMaxBullets() { return MAX_BULLETS; }
-Coords Ship::getBulletPosition(int index) {
-	return bullet[index].getPosition();
+Bullet Ship::getBullet(int index) {
+	return bullet[index];
 }
 
 void Ship::turnRight() {
@@ -58,7 +56,7 @@ bool Ship::asteroidHitShip(std::vector<Asteroid>& asteroid) {
 	for (int i = 0; i < asteroid.size(); i++) {
 		if (asteroid.at(i).isBig()) {
 			for (int j = 0; j < 9; j++) {
-				if (position.equalsXY(asteroid.at(i).getPositionBig()[j])) {
+				if (position.equals(asteroid.at(i).getPositionBig()[j]) || scopePosition.equals(asteroid.at(i).getPositionBig()[j])) {
 					std::thread tPlayShipExplosionSound(playShipExplosionSound);
 					tPlayShipExplosionSound.detach();
 					return true;
@@ -66,7 +64,7 @@ bool Ship::asteroidHitShip(std::vector<Asteroid>& asteroid) {
 			}
 		}
 		else {
-			if (position.equalsXY(asteroid.at(i).getPositionSmall())) {
+			if (position.equals(asteroid.at(i).getPositionSmall()) || scopePosition.equals(asteroid.at(i).getPositionSmall())) {
 				std::thread tPlayShipExplosionSound(playShipExplosionSound);
 				tPlayShipExplosionSound.detach();
 				return true;

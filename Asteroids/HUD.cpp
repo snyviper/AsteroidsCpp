@@ -146,22 +146,24 @@ void HUD::unprintDifficultyArrowBack() {
 	std::cout << ' ';
 }
 
-void HUD::blinkShip(Ship ship, bool visible) {
+void HUD::blinkShip(Ship ship, bool* visible) {
 	
-	if (visible) {
+	if (*visible) {
 		printShip(ship);
+		*visible = false;
 	}
 	else {
-		cursor.goToXY(ship.getX(), ship.getY());
+		cursor.goToPosition(ship.getPosition());
 		std::cout << ' ';
-		cursor.goToXY(ship.getScopeX(), ship.getScopeY());
+		cursor.goToPosition(ship.getScopePosition());
 		std::cout << ' ';
+		*visible = true;
 	}
 }
 void HUD::printShip(Ship ship) {
-	cursor.goToXY(ship.getX(), ship.getY());
+	cursor.goToPosition(ship.getPosition());
 	std::cout << SHIP_BODY;
-	cursor.goToXY(ship.getScopeX(), ship.getScopeY());
+	cursor.goToPosition(ship.getScopePosition());
 	// 7 0 1
 	// 6   2
 	// 5 4 3
@@ -193,33 +195,31 @@ void HUD::printShip(Ship ship) {
 	}
 }
 
-void HUD::printBullet(Coords bulletPosition) {
-	cursor.goToXY(bulletPosition.getX(), bulletPosition.getY());
+void HUD::printBullet(Bullet bullet) {
+	cursor.goToPosition(bullet.getPosition());
 	std::cout << BULLET;
 }
 
 void HUD::printAsteroid(Asteroid asteroid) {
 	if (asteroid.isBig()) {
 		int tempX, tempY;
-		for (int i = -1; i <= 1; i++) {
-			for (int j = -1; j <= 1; j++) {
-				tempX = asteroid.getX() + j;
-				tempY = asteroid.getY() + i;
-				if (tempX < 0)
-					tempX += ScreenLimit().getSpaceX();
-				if (tempY < 0)
-					tempY += ScreenLimit().getSpaceY();
-				if (tempX >= ScreenLimit().getSpaceX())
-					tempX -= ScreenLimit().getSpaceX();
-				if (tempY >= ScreenLimit().getSpaceY())
-					tempY -= ScreenLimit().getSpaceY();
-				cursor.goToXY(tempX, tempY);
-				std::cout << ASTEROID;
-			}
+		for (int i = 0; i < 9; i++) {
+			tempX = asteroid.getPositionBig()[i].getX();
+			tempY = asteroid.getPositionBig()[i].getY();
+			if (tempX < 0)
+				tempX += ScreenLimit().getSpaceX();
+			else if (tempX >= ScreenLimit().getSpaceX())
+				tempX -= ScreenLimit().getSpaceX();
+			if (tempY < 0)
+				tempY += ScreenLimit().getSpaceY();
+			else if (tempY >= ScreenLimit().getSpaceY())
+				tempY -= ScreenLimit().getSpaceY();
+			cursor.goToXY(tempX, tempY);
+			std::cout << ASTEROID;
 		}
 	}
 	else {
-		cursor.goToXY(asteroid.getX(), asteroid.getY());
+		cursor.goToPosition(asteroid.getPositionSmall());
 		std::cout << ASTEROID;
 	}
 }
@@ -233,7 +233,7 @@ void HUD::printInstructionsStart() {
 
 void HUD::printDeadShip(Ship ship) {
 	printShip(ship);
-	cursor.goToXY(ship.getX(), ship.getY());
+	cursor.goToPosition(ship.getPosition());
 	std::cout << 'X';
 }
 void HUD::printFinalScore(int score) {
@@ -262,9 +262,6 @@ void HUD::refreshHUD(int hearts, int score, double fps) {
 	printScoreWord(score);
 	printFPSName(fps);
 	printBottomBorder();
-}
-void HUD::cleanScreen() {
-	system("cls");
 }
 
 void HUD::startMainScreen() {

@@ -10,6 +10,14 @@ void Cursor::goToXY(unsigned int x, unsigned int y) {
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
     }
 }
+void Cursor::goToPosition(Coords position) {
+    if (position.getX() < ScreenLimit().getSpaceX() && position.getY() < ScreenLimit().getSpaceY()) {
+        cursor.X = position.getX();
+        cursor.Y = position.getY() + 2;
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+    }
+}
+
 void Cursor::goToShipStart() {
     cursor.X = ScreenLimit().getSpaceX() / 2;
     cursor.Y = ScreenLimit().getSpaceY() / 2;
@@ -189,19 +197,6 @@ void Cursor::goToPaused() {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
 }
 
-/*
-void Cursor::goToLastPosition(ScreenLimit limit) {
-    cursor.X -= 1;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
-}
-
-void Cursor::goDown(ScreenLimit limit) {
-    if (cursor.Y < limit.getY() - 1) {
-        cursor.Y++;
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
-    }
-}
-*/
 void Cursor::goToHelpW() {
     cursor.X = 4;
     cursor.Y = 2;

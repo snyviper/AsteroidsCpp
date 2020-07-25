@@ -26,12 +26,8 @@ public:
 
 	void newFrame(int frame);
 
-	bool bulletCollision(Coords bulletPosition);
-
 	void turnSmall(int difficulty);
 
-	int getX();
-	int getY();
 	bool isBig();
 	Coords getPositionSmall();
 	Coords* getPositionBig();

@@ -26,6 +26,12 @@ void Sounds::playAsteroidExplosionSound() {
 void Sounds::playGunSound() {
 	PlaySound(TEXT("LaserGun01.wav"), NULL, SND_ASYNC);
 }
+void Sounds::playPauseSound() {
+	PlaySound(TEXT("MenuSelect.wav"), NULL, SND_ASYNC);
+}
+void Sounds::playHelpSound() {
+	PlaySound(TEXT("MenuSelect.wav"), NULL, SND_ASYNC);
+}
 
 void Sounds::playGameOverSound() {
 	PlaySound(TEXT("Failure.wav"), NULL, SND_ASYNC);
