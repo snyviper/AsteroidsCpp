@@ -78,6 +78,12 @@ void Space::damageShip() {
 	removeHeart();
 }
 
+void Space::help() {
+	Sounds().playHelpSound();
+	HUD().printHelp();
+	Sounds().playHelpSound();
+}
+
 double Space::getFPS(clock_t refreshRate) {
 	refreshRate = clock() - refreshRate;
 	double refreshRateDouble = (0.1 - ((double)refreshRate) / CLOCKS_PER_SEC) * 1000;
@@ -120,8 +126,7 @@ void Space::beforeStartGame(int difficulty) {
 				start = true;
 			}
 			else if (key == 'h') {
-				Sounds().playHelpSound();
-				HUD().printHelp();
+				help();
 			}
 		}
 		fps = getFPS(refreshRate);
@@ -158,7 +163,7 @@ void Space::startBattle(int difficulty) {
 				pauseGame(fps);
 				break;
 			case 'h':
-				HUD().printHelp();
+				help();
 				HUD().refreshHUD(hearts, score, fps);
 				printAsteroids();
 				break;
@@ -193,13 +198,13 @@ void Space::pauseGame(double fps) {
 	Sounds().playPauseSound();
 	HUD().printPause();
 	while (_getch() == 'h') {
-		Sounds().playHelpSound();
-		HUD().printHelp();
+		help();
 		HUD().refreshHUD(hearts, score, fps);
 		printAsteroids();
 		HUD().printShip(ship);
 		HUD().printPause();
 	}
+	Sounds().playPauseSound();
 }
 
 void Space::setHearts(int difficulty) {
@@ -229,10 +234,10 @@ void Space::addHeart() {
 }
 
 void Space::addScoreAsteroidSmall(int difficulty, int stage) {
-	score += (15 + stage * 3) * (difficulty + 1);
+	score += (15 + stage * 3) * (difficulty * 2 + 1);
 }
 void Space::addScoreAsteroidBig(int difficulty, int stage) {
-	score += (5 + stage) * (difficulty + 1);
+	score += (5 + stage) * (difficulty * 2 + 1);
 }
 void Space::addScoreClearAsteroids(int difficulty, int stage) {
 	switch (difficulty) {

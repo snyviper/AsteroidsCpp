@@ -1,13 +1,14 @@
 #ifndef ASTEROID_H
 #define ASTEROID_H
 
-#include "Coords.h"
+#include "Position.h"
+#include "Speed.h"
 
 class Asteroid
 {
 //private:
-	Coords position[9];
-	Coords speed;
+	Position position[9];
+	Speed speed;
 	bool big;
 	static int s_RandAdd;
 
@@ -20,7 +21,7 @@ class Asteroid
 public:
 	Asteroid();
 	Asteroid(int difficulty);
-	Asteroid(int difficulty, Coords Position);
+	Asteroid(int difficulty, Position Position);
 
 	void newSpeed(int difficulty);
 
@@ -29,9 +30,9 @@ public:
 	void turnSmall(int difficulty);
 
 	bool isBig();
-	Coords getPositionSmall();
-	Coords* getPositionBig();
-	Coords getSpeed();
+	Position getPositionSmall();
+	Position* getPositionBig();
+	Speed getSpeed();
 };
 
 #endif

@@ -112,11 +112,11 @@ Asteroid::Asteroid(int difficulty) { // creates a big asteroid
 		for (int j = -1; j <= 1; j++, index++)
 			position[index].setPosition(x + j, y + i);
 	}
-	speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
+	speed = Speed(randomSpeed(difficulty), randomSpeed(difficulty));
 }
-Asteroid::Asteroid(int difficulty, Coords Position) { // creates a small asteroid
+Asteroid::Asteroid(int difficulty, Position positionParam) { // creates a small asteroid
 	big = false;
-	position[0] = Position;
+	position[0] = positionParam;
 	speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
 }
 
@@ -140,6 +140,6 @@ void Asteroid::turnSmall(int difficulty) {
 }
 
 bool Asteroid::isBig() { return big; }
-Coords Asteroid::getPositionSmall() { return position[0]; }
-Coords* Asteroid::getPositionBig() { return position; }
-Coords Asteroid::getSpeed() { return speed; }
+Position Asteroid::getPositionSmall() { return position[0]; }
+Position* Asteroid::getPositionBig() { return position; }
+Speed Asteroid::getSpeed() { return speed; }

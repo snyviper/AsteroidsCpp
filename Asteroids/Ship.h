@@ -2,7 +2,8 @@
 #define SHIP_H
 
 #include <vector>
-#include "Coords.h"
+#include "Position.h"
+#include "Speed.h"
 #include "Bullet.h"
 #include "Asteroid.h"
 #include "Sounds.h"
@@ -10,9 +11,9 @@
 class Ship : Sounds
 {
 //private:
-	Coords scopePosition;
-	Coords position;
-	Coords speed;
+	Position scopePosition;
+	Position position;
+	Speed speed;
 	static const int MAX_BULLETS = 3;
 	Bullet bullet[MAX_BULLETS];
 	int facing;
@@ -24,8 +25,8 @@ public:
 	void newFrame(int frame);
 	void newBulletsFrame();
 
-	Coords getPosition();
-	Coords getScopePosition();
+	Position getPosition();
+	Position getScopePosition();
 	int getFacing();
 	int getMaxBullets();
 	Bullet getBullet(int index);

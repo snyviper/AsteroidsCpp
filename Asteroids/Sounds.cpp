@@ -30,7 +30,7 @@ void Sounds::playPauseSound() {
 	PlaySound(TEXT("MenuSelect.wav"), NULL, SND_ASYNC);
 }
 void Sounds::playHelpSound() {
-	PlaySound(TEXT("MenuSelect.wav"), NULL, SND_ASYNC);
+	PlaySound(TEXT("HelpHit.wav"), NULL, SND_ASYNC);
 }
 
 void Sounds::playGameOverSound() {

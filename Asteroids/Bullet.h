@@ -1,26 +1,27 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include "Coords.h"
+#include "Position.h"
+#include "Speed.h"
 
 class Bullet
 {
 //private:
 	bool existance;
-	Coords position;
-	Coords speed;
+	Position position;
+	Speed speed;
 	int remainingFrames;
 
 public:
 	Bullet();
-	void newBullet(Coords shipPosition, int facing);
+	void newBullet(Position shipPosition, int facing);
 
 	void newFrame();
 
-	bool hitAsteroid(Coords positionAsteroid);
+	bool hitAsteroid(Position positionAsteroid);
 
 	bool exists();
-	Coords getPosition();
+	Position getPosition();
 };
 
 #endif

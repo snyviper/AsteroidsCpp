@@ -10,7 +10,7 @@ void Cursor::goToXY(unsigned int x, unsigned int y) {
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
     }
 }
-void Cursor::goToPosition(Coords position) {
+void Cursor::goToPosition(Position position) {
     if (position.getX() < ScreenLimit().getSpaceX() && position.getY() < ScreenLimit().getSpaceY()) {
         cursor.X = position.getX();
         cursor.Y = position.getY() + 2;

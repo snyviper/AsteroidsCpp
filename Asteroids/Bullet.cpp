@@ -2,11 +2,11 @@
 
 Bullet::Bullet() {
 	existance = false;
-	position.setPosition(0, 0);
-	speed.setSpeed(0, 0);
+	position = Position(0, 0);
+	speed = Speed(0, 0);
 	remainingFrames = 0;
 }
-void Bullet::newBullet(Coords shipPosition, int facing) {
+void Bullet::newBullet(Position shipPosition, int facing) {
 	// facing
 	// 7 0 1
 	// 6   2
@@ -59,7 +59,7 @@ void Bullet::newFrame() {
 	}
 }
 
-bool Bullet::hitAsteroid(Coords positionAsteroid) {
+bool Bullet::hitAsteroid(Position positionAsteroid) {
 	if (position.equals(positionAsteroid)) {
 		existance = false;
 		remainingFrames = 0;
@@ -69,4 +69,4 @@ bool Bullet::hitAsteroid(Coords positionAsteroid) {
 }
 
 bool Bullet::exists() { return existance; }
-Coords Bullet::getPosition(){ return position; }
+Position Bullet::getPosition(){ return position; }

@@ -28,8 +28,8 @@ void Ship::newBulletsFrame() {
 	}
 }
 
-Coords Ship::getPosition() { return position; }
-Coords Ship::getScopePosition() { return scopePosition; }
+Position Ship::getPosition() { return position; }
+Position Ship::getScopePosition() { return scopePosition; }
 int Ship::getFacing() { return facing; }
 int Ship::getMaxBullets() { return MAX_BULLETS; }
 Bullet Ship::getBullet(int index) {

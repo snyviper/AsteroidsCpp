@@ -31,6 +31,8 @@ class Space : Sounds
 
 	void damageShip();
 
+	void help();
+
 	double getFPS(clock_t refreshRate);
 
 	void beforeStartGame(int difficulty);

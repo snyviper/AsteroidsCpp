@@ -6,13 +6,18 @@
 #include "ScreenLimit.h"
 #include "Sounds.h"
 
-void showConsoleCursor(bool showFlag)
-{
+void showConsoleCursor(bool showFlag){
 	HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO cursorInfo;
 	GetConsoleCursorInfo(out, &cursorInfo);
 	cursorInfo.bVisible = showFlag;
 	SetConsoleCursorInfo(out, &cursorInfo);
+}
+
+void help() {
+	Sounds().playHelpSound();
+	HUD().printHelp();
+	Sounds().playHelpSound();
 }
 
 int main()
@@ -61,8 +66,7 @@ int main()
 											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
-											Sounds().playHelpSound();
-											HUD().printHelp();
+											help();
 											HUD().printDifficultySelection();
 											break;
 									}
@@ -89,8 +93,7 @@ int main()
 											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
-											Sounds().playHelpSound();
-											HUD().printHelp();
+											help();
 											HUD().printDifficultySelection();
 											break;
 									}
@@ -117,8 +120,7 @@ int main()
 											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
-											Sounds().playHelpSound();
-											HUD().printHelp();
+											help();
 											HUD().printDifficultySelection();
 											break;
 									}
@@ -145,8 +147,7 @@ int main()
 											HUD().printMainScreen();
 											break;
 										case 'h': // show help page
-											Sounds().playHelpSound();
-											HUD().printHelp();
+											help();
 											HUD().printDifficultySelection();
 											break;
 									}
@@ -166,8 +167,7 @@ int main()
 											Sounds().playMenuBackSound();
 											break;
 										case 'h': // show help page
-											Sounds().playHelpSound();
-											HUD().printHelp();
+											help();
 											HUD().printDifficultySelection();
 											break;
 									}
@@ -176,8 +176,7 @@ int main()
 						}
 						break;
 					case 'h': // show help page
-						Sounds().playHelpSound();
-						HUD().printHelp();
+						help();
 						HUD().printMainScreen();
 						break;
 				}
@@ -196,8 +195,7 @@ int main()
 						Sounds().playMenuExitSound();
 						break;
 					case 'h': // show help page
-						Sounds().playHelpSound();
-						HUD().printHelp();
+						help();
 						HUD().printMainScreen();
 						break;
 				}
