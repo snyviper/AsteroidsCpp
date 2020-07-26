@@ -1,5 +1,6 @@
 #include "Sounds.h"
 #include <Windows.h>
+#pragma comment(lib, "winmm.lib")
 
 //public:
 Sounds::Sounds() {}

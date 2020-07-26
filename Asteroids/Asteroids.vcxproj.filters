@@ -87,4 +87,30 @@
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Explosion01.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Failure.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="HelpHit.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="LaserGun01.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="MenuBack.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="MenuHit.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="MenuSelect.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+    <Media Include="Success.wav">
+      <Filter>Arquivos de Recurso</Filter>
+    </Media>
+  </ItemGroup>
 </Project>
