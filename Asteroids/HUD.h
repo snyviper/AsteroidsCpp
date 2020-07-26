@@ -14,10 +14,10 @@ class HUD
 	static const char HELP_VERTICAL = 186, HELP_BOTTOM_LEFT = 200, HELP_BOTTOM_RIGHT = 188;
 	static Cursor cursor;
 
+	static void cleanSpace();
 	static void printHealth(int hearts);
-	static void printHearts(int hearts);
 	static void printTopBorder();
-	static void printScoreWord(int score);
+	static void printScoreName(int score);
 	static void printFPSName(double fps);
 	static void printBottomBorder();
 
@@ -58,11 +58,13 @@ public:
 
 	static void printInstructionsDead();
 
-	static void refreshHUD(int hearts, int score, double fps);
+	static void printHUD(int hearts, int score, double fps);
+	static void refreshHUD(double fps);
 	static void startMainScreen();
 
+	static void printHearts(int hearts);
 	static void printScoreValue(int score);
-	static void printFPS(double fps);
+	static void printFPSValue(double fps);
 
 	static void printHelp();
 	static void printHelpIcon();

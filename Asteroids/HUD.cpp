@@ -9,19 +9,16 @@
 
 Cursor HUD::cursor = Cursor();
 
+void HUD::cleanSpace() {
+	cursor.goToSpace();
+	std::cout << ScreenLimit().getCleanSpace();
+}
 void HUD::printHealth(int hearts) {
 	cursor.goToHealth();
 	std::cout << "Health:";
 	printHearts(hearts);
 }
-void HUD::printHearts(int hearts) {
-	std::string allHearts = "";
-	cursor.goToHearts();
-	for (int i = 0; i < hearts; i++)
-		allHearts += HEART;
-	std::cout << std::setfill(' ') << std::setw(4) << std::left << allHearts;
-}
-void HUD::printScoreWord(int score) {
+void HUD::printScoreName(int score) {
 	cursor.goToScoreWord(6);
 	std::cout << "Score: ";
 	printScoreValue(score);
@@ -45,7 +42,7 @@ void HUD::printBottomBorder() {
 void HUD::printFPSName(double fps) {
 	cursor.goToFPSName();
 	std::cout << "FPS:";
-	printFPS(fps);
+	printFPSValue(fps);
 }
 
 void HUD::printTitle() {
@@ -255,13 +252,17 @@ void HUD::printInstructionsDead() {
 	std::cout << "to exit";
 }
 
-void HUD::refreshHUD(int hearts, int score, double fps) {
+void HUD::printHUD(int hearts, int score, double fps) {
 	system("cls");
 	printHealth(hearts);
 	printTopBorder();
-	printScoreWord(score);
+	printScoreName(score);
 	printFPSName(fps);
 	printBottomBorder();
+}
+void HUD::refreshHUD(double fps) {
+	cleanSpace();
+	printFPSValue(fps);
 }
 
 void HUD::startMainScreen() {
@@ -271,6 +272,13 @@ void HUD::startMainScreen() {
 	printHelp();
 }
 
+void HUD::printHearts(int hearts) {
+	std::string allHearts = "";
+	cursor.goToHearts();
+	for (int i = 0; i < hearts; i++)
+		allHearts += HEART;
+	std::cout << std::setfill(' ') << std::setw(4) << std::left << allHearts;
+}
 void HUD::printScoreValue(int score) {
 	cursor.goToScoreValue(6);
 	if (score > 999999)
@@ -279,7 +287,7 @@ void HUD::printScoreValue(int score) {
 		std::cout << std::internal << std::setfill('0') << std::setw(6) << score;
 }
 
-void HUD::printFPS(double fps) {
+void HUD::printFPSValue(double fps) {
 	cursor.goToFPS();
 	if (fps > 99.9)
 		std::cout << "99.9";

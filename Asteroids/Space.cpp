@@ -45,11 +45,13 @@ void Space::damageAsteroid(int index, int difficulty) {
 		addScoreAsteroidSmall(difficulty, stage);
 		asteroid.erase(asteroid.begin() + index);
 	}
+	HUD().printScoreValue(score);
 }
 
 bool Space::asteroidHitShip() {
 	if (ship.asteroidHitShip(asteroid)) {
 		damageShip();
+		HUD().printHearts(hearts);
 		return true;
 	}
 	return false;
@@ -78,10 +80,11 @@ void Space::damageShip() {
 	removeHeart();
 }
 
-void Space::help() {
+void Space::help(double fps) {
 	Sounds().playHelpSound();
 	HUD().printHelp();
 	Sounds().playHelpSound();
+	HUD().printHUD(hearts, score, fps);
 }
 
 double Space::getFPS(clock_t refreshRate) {
@@ -102,11 +105,11 @@ void Space::beforeStartGame(int difficulty) {
 	double fps = 0;
 	int index;
 	ship.resetShip();
-	HUD().refreshHUD(hearts, score, fps);
+	HUD().printHUD(hearts, score, fps);
 	while (!start) {
 		refreshRate = clock();
 		nextFrame();
-		HUD().refreshHUD(hearts, score, fps);
+		HUD().refreshHUD(fps);
 		movePrintAsteroids();
 		ship.newBulletsFrame();
 		index = ship.bulletsHitAsteroid(asteroid);
@@ -126,7 +129,7 @@ void Space::beforeStartGame(int difficulty) {
 				start = true;
 			}
 			else if (key == 'h') {
-				help();
+				help(fps);
 			}
 		}
 		fps = getFPS(refreshRate);
@@ -141,7 +144,7 @@ void Space::startBattle(int difficulty) {
 	while (asteroid.size() > 0 && !shipHit) {
 		refreshRate = clock();
 		nextFrame();
-		HUD().refreshHUD(hearts, score, fps);
+		HUD().refreshHUD(fps);
 		movePrintAsteroids();
 		if (_kbhit()) { // if key is pressed
 			key = _getch();
@@ -163,8 +166,7 @@ void Space::startBattle(int difficulty) {
 				pauseGame(fps);
 				break;
 			case 'h':
-				help();
-				HUD().refreshHUD(hearts, score, fps);
+				help(fps);
 				printAsteroids();
 				break;
 			}
@@ -198,8 +200,7 @@ void Space::pauseGame(double fps) {
 	Sounds().playPauseSound();
 	HUD().printPause();
 	while (_getch() == 'h') {
-		help();
-		HUD().refreshHUD(hearts, score, fps);
+		help(fps);
 		printAsteroids();
 		HUD().printShip(ship);
 		HUD().printPause();

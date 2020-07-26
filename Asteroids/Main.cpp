@@ -5,6 +5,7 @@
 #include "HUD.h"
 #include "ScreenLimit.h"
 #include "Sounds.h"
+//#pragma comment(lib, "Kernel32.lib")
 
 void showConsoleCursor(bool showFlag){
 	HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);

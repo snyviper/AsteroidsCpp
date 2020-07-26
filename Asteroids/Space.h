@@ -31,7 +31,7 @@ class Space : Sounds
 
 	void damageShip();
 
-	void help();
+	void help(double fps);
 
 	double getFPS(clock_t refreshRate);
 
