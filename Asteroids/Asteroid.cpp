@@ -107,7 +107,7 @@ Asteroid::Asteroid() { }
 
 Asteroid::Asteroid(int difficulty) { // creates a big asteroid
 	big = true;
-	int x = randomPosition(ScreenLimit().getSpaceX()), y = randomPosition(ScreenLimit().getSpaceY());
+	int x = randomPosition(ScreenLimit::getSpaceX()), y = randomPosition(ScreenLimit::getSpaceY());
 	for (int i = -1, index = 0; i <= 1; i++) {
 		for (int j = -1; j <= 1; j++, index++)
 			position[index].setPosition(x + j, y + i);

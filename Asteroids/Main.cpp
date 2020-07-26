@@ -16,160 +16,160 @@ void showConsoleCursor(bool showFlag){
 }
 
 void help() {
-	Sounds().playHelpSound();
-	HUD().printHelp();
-	Sounds().playHelpSound();
+	Sounds::playHelpSound();
+	HUD::printHelp();
+	Sounds::playHelpSound();
 }
 
 int main()
 {
+	ScreenLimit::setLimits(128, 45);
+	Space space;
 	char key;
 	bool exit = false;
-	showConsoleCursor(false);
-	ScreenLimit(128, 45);
-	Space space;
+	bool exitDifficulty;
 	int arrowMainScreen = 0;
 	int arrowDifficulty;
-	bool exitDifficulty;
-	HUD().printMainScreen();
+	showConsoleCursor(false);
+	HUD::printMainScreen();
 	while (!exit) {
 		switch (arrowMainScreen) {
 			case 0:
-				HUD().printArrowNewGame();
+				HUD::printArrowNewGame();
 				key = _getch();
 				switch (key) {
 					case 's': // down arrow
-						HUD().unprintArrowNewGame();
+						HUD::unprintArrowNewGame();
 						arrowMainScreen = 1;
-						Sounds().playMenuSelectSound();
+						Sounds::playMenuSelectSound();
 						break;
 					case 'j': // select difficulty
 						arrowDifficulty = 1;
 						exitDifficulty = false;
-						Sounds().playMenuHitSound();
-						HUD().printDifficultySelection();
+						Sounds::playMenuHitSound();
+						HUD::printDifficultySelection();
 						while (!exitDifficulty) {
 							switch (arrowDifficulty) {
 								case 0: // easy
-									HUD().printDifficultyArrowEasy();
+									HUD::printDifficultyArrowEasy();
 									key = _getch();
 									switch (key) {
 										case 's': // go down
-											HUD().unprintDifficultyArrowEasy();
+											HUD::unprintDifficultyArrowEasy();
 											arrowDifficulty++;
-											Sounds().playMenuSelectSound();
+											Sounds::playMenuSelectSound();
 											break;
 										case 'j': // start game
 											space = Space(arrowDifficulty);
-											Sounds().playMenuHitSound();
+											Sounds::playMenuHitSound();
 											space.game(arrowDifficulty);
 											exitDifficulty = true;
-											HUD().printMainScreen();
+											HUD::printMainScreen();
 											break;
 										case 'h': // show help page
 											help();
-											HUD().printDifficultySelection();
+											HUD::printDifficultySelection();
 											break;
 									}
 									break;
 								case 1: // normal
-									HUD().printDifficultyArrowNormal();
+									HUD::printDifficultyArrowNormal();
 									key = _getch();
 									switch (key) {
 										case 'w': // go up
-											HUD().unprintDifficultyArrowNormal();
+											HUD::unprintDifficultyArrowNormal();
 											arrowDifficulty--;
-											Sounds().playMenuSelectSound();
+											Sounds::playMenuSelectSound();
 											break;
 										case 's': // go down
-											HUD().unprintDifficultyArrowNormal();
+											HUD::unprintDifficultyArrowNormal();
 											arrowDifficulty++;
-											Sounds().playMenuSelectSound();
+											Sounds::playMenuSelectSound();
 											break;
 										case 'j': // start game
 											space = Space(arrowDifficulty);
-											Sounds().playMenuHitSound();
+											Sounds::playMenuHitSound();
 											space.game(arrowDifficulty);
 											exitDifficulty = true;
-											HUD().printMainScreen();
+											HUD::printMainScreen();
 											break;
 										case 'h': // show help page
 											help();
-											HUD().printDifficultySelection();
+											HUD::printDifficultySelection();
 											break;
 									}
 									break;
 								case 2: // hard
-									HUD().printDifficultyArrowHard();
+									HUD::printDifficultyArrowHard();
 									key = _getch();
 									switch (key) {
 										case 'w': // go up
-											HUD().unprintDifficultyArrowHard();
+											HUD::unprintDifficultyArrowHard();
 											arrowDifficulty--;
-											Sounds().playMenuSelectSound();
+											Sounds::playMenuSelectSound();
 											break;
 										case 's': // go down
-											HUD().unprintDifficultyArrowHard();
+											HUD::unprintDifficultyArrowHard();
 											arrowDifficulty++;
-											Sounds().playMenuSelectSound();
+											Sounds::playMenuSelectSound();
 											break;
 										case 'j': // start game
 											space = Space(arrowDifficulty);
-											Sounds().playMenuHitSound();
+											Sounds::playMenuHitSound();
 											space.game(arrowDifficulty);
 											exitDifficulty = true;
-											HUD().printMainScreen();
+											HUD::printMainScreen();
 											break;
 										case 'h': // show help page
 											help();
-											HUD().printDifficultySelection();
+											HUD::printDifficultySelection();
 											break;
 									}
 									break;
 								case 3: // extreme
-									HUD().printDifficultyArrowExtreme();
+									HUD::printDifficultyArrowExtreme();
 									key = _getch();
 									switch (key) {
 										case 'w': // go up
-											HUD().unprintDifficultyArrowExtreme();
+											HUD::unprintDifficultyArrowExtreme();
 											arrowDifficulty--;
-											Sounds().playMenuSelectSound();
+											Sounds::playMenuSelectSound();
 											break;
 										case 's': // go down
-											HUD().unprintDifficultyArrowExtreme();
+											HUD::unprintDifficultyArrowExtreme();
 											arrowDifficulty++;
-											Sounds().playMenuSelectSound();
+											Sounds::playMenuSelectSound();
 											break;
 										case 'j': // start game
 											space = Space(arrowDifficulty);
-											Sounds().playMenuHitSound();
+											Sounds::playMenuHitSound();
 											space.game(arrowDifficulty);
 											exitDifficulty = true;
-											HUD().printMainScreen();
+											HUD::printMainScreen();
 											break;
 										case 'h': // show help page
 											help();
-											HUD().printDifficultySelection();
+											HUD::printDifficultySelection();
 											break;
 									}
 									break;
 								case 4: // back
-									HUD().printDifficultyArrowBack();
+									HUD::printDifficultyArrowBack();
 									key = _getch();
 									switch (key) {
 										case 'w': // go up
-											HUD().unprintDifficultyArrowBack();
+											HUD::unprintDifficultyArrowBack();
 											arrowDifficulty--;
-											Sounds().playMenuSelectSound();
+											Sounds::playMenuSelectSound();
 											break;
 										case 'j': // go back
 											exitDifficulty = true;
-											HUD().printMainScreen();
-											Sounds().playMenuBackSound();
+											HUD::printMainScreen();
+											Sounds::playMenuBackSound();
 											break;
 										case 'h': // show help page
 											help();
-											HUD().printDifficultySelection();
+											HUD::printDifficultySelection();
 											break;
 									}
 									break;
@@ -178,26 +178,26 @@ int main()
 						break;
 					case 'h': // show help page
 						help();
-						HUD().printMainScreen();
+						HUD::printMainScreen();
 						break;
 				}
 				break;
 			case 1:
-				HUD().printArrowExit();
+				HUD::printArrowExit();
 				key = _getch();
 				switch (key) {
 					case 'w': // up arrow
-						HUD().unprintArrowExit();
+						HUD::unprintArrowExit();
 						arrowMainScreen = 0;
-						Sounds().playMenuSelectSound();
+						Sounds::playMenuSelectSound();
 						break;
 					case 'j': // exit
 						exit = true;
-						Sounds().playMenuExitSound();
+						Sounds::playMenuExitSound();
 						break;
 					case 'h': // show help page
 						help();
-						HUD().printMainScreen();
+						HUD::printMainScreen();
 						break;
 				}
 				break;

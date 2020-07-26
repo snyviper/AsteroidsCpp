@@ -4,13 +4,13 @@
 //private
 void Position::verifyLimit() {
 	if (x < 0)
-		x += ScreenLimit().getSpaceX();
-	else if (x >= ScreenLimit().getSpaceX())
-		x -= ScreenLimit().getSpaceX();
+		x += ScreenLimit::getSpaceX();
+	else if (x >= ScreenLimit::getSpaceX())
+		x -= ScreenLimit::getSpaceX();
 	if (y < 0)
-		y += ScreenLimit().getSpaceY();
-	else if (y >= ScreenLimit().getSpaceY())
-		y -= ScreenLimit().getSpaceY();
+		y += ScreenLimit::getSpaceY();
+	else if (y >= ScreenLimit::getSpaceY())
+		y -= ScreenLimit::getSpaceY();
 }
 
 //public
@@ -26,12 +26,12 @@ void Position::setPosition(int X, int Y) {
 	verifyLimit();
 }
 void Position::setPositionShipStart() {
-	x = ScreenLimit().getSpaceX() / 2;
-	y = ScreenLimit().getSpaceY() / 2;
+	x = ScreenLimit::getSpaceX() / 2;
+	y = ScreenLimit::getSpaceY() / 2;
 }
 void Position::setPositionScopeStart() {
-	x = ScreenLimit().getSpaceX() / 2;
-	y = (ScreenLimit().getSpaceY() / 2) - 1;
+	x = ScreenLimit::getSpaceX() / 2;
+	y = (ScreenLimit::getSpaceY() / 2) - 1;
 }
 void Position::plusOneXY() {
 	setPosition(x + 1, y + 1);

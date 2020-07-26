@@ -4,13 +4,7 @@
 #include <Windows.h>
 #include "Position.h"
 
-class Cursor
-{
-//private:
-    COORD cursor;
-
-public:
-    Cursor();
+namespace Cursor {
     void goToXY(unsigned int x, unsigned int y);
     void goToPosition(Position position);
     void goToShipStart();

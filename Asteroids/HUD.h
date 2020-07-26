@@ -5,71 +5,50 @@
 #include "Ship.h"
 #include "Asteroid.h"
 
-class HUD
+namespace HUD
 {
-//private:
-	static const char ARROW = 175, BOTTOMBORDER = 238, ASTEROID = 219, HEART = 3, BULLET = 250;
-	static const char SHIP_BODY = 'O', FACE_HORIZONTAL = 196, FACE_VERTICAL = '|', FACE_135_DEGREES = '\\', FACE_45_DEGREES = '/';
-	static const char HELP_TOP_LEFT = 201, HELP_HORIZONTAL = 205, HELP_TOP_RIGHT = 187;
-	static const char HELP_VERTICAL = 186, HELP_BOTTOM_LEFT = 200, HELP_BOTTOM_RIGHT = 188;
-	static Cursor cursor;
+	void printMainScreen();
+	void printArrowNewGame();
+	void unprintArrowNewGame();
+	void printArrowExit();
+	void unprintArrowExit();
 
-	static void cleanSpace();
-	static void printHealth(int hearts);
-	static void printTopBorder();
-	static void printScoreName(int score);
-	static void printFPSName(double fps);
-	static void printBottomBorder();
+	void printDifficultySelection();
+	void printDifficultyArrowEasy();
+	void unprintDifficultyArrowEasy();
+	void printDifficultyArrowNormal();
+	void unprintDifficultyArrowNormal();
+	void printDifficultyArrowHard();
+	void unprintDifficultyArrowHard();
+	void printDifficultyArrowExtreme();
+	void unprintDifficultyArrowExtreme();
+	void printDifficultyArrowBack();
+	void unprintDifficultyArrowBack();
 
-	static void printTitle();
-	static void printNewGame();
-	static void printExit();
+	void blinkShip(Ship ship, bool* visible);
+	void printShip(Ship ship);
+	void printBullet(Bullet bullet);
+	void printAsteroid(Asteroid asteroid);
 
-public:
-	HUD();
+	void printInstructionsStart();
 
-	static void printMainScreen();
-	static void printArrowNewGame();
-	static void unprintArrowNewGame();
-	static void printArrowExit();
-	static void unprintArrowExit();
+	void printDeadShip(Ship ship);
+	void printFinalScore(int score);
 
-	static void printDifficultySelection();
-	static void printDifficultyArrowEasy();
-	static void unprintDifficultyArrowEasy();
-	static void printDifficultyArrowNormal();
-	static void unprintDifficultyArrowNormal();
-	static void printDifficultyArrowHard();
-	static void unprintDifficultyArrowHard();
-	static void printDifficultyArrowExtreme();
-	static void unprintDifficultyArrowExtreme();
-	static void printDifficultyArrowBack();
-	static void unprintDifficultyArrowBack();
+	void printInstructionsDead();
 
-	static void blinkShip(Ship ship, bool* visible);
-	static void printShip(Ship ship);
-	static void printBullet(Bullet bullet);
-	static void printAsteroid(Asteroid asteroid);
+	void printHUD(int hearts, int score, double fps);
+	void refreshHUD(double fps);
+	void startMainScreen();
 
-	static void printInstructionsStart();
+	void printHearts(int hearts);
+	void printScoreValue(int score);
+	void printFPSValue(double fps);
 
-	static void printDeadShip(Ship ship);
-	static void printFinalScore(int score);
+	void printHelp();
+	void printHelpIcon();
 
-	static void printInstructionsDead();
-
-	static void printHUD(int hearts, int score, double fps);
-	static void refreshHUD(double fps);
-	static void startMainScreen();
-
-	static void printHearts(int hearts);
-	static void printScoreValue(int score);
-	static void printFPSValue(double fps);
-
-	static void printHelp();
-	static void printHelpIcon();
-
-	static void printPause();
+	void printPause();
 };
 
 #endif

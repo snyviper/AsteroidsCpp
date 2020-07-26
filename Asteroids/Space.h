@@ -7,7 +7,7 @@
 #include "Asteroid.h"
 #include "Sounds.h"
 
-class Space : Sounds
+class Space
 {
 //private
 	int frame;

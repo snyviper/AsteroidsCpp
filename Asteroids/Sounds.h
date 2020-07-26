@@ -1,24 +1,22 @@
 #ifndef SOUNDS_H
 #define SOUNDS_H
 
-class Sounds
+namespace Sounds
 {
-public:
-	Sounds();
+	void playMenuSelectSound();
+	void playMenuHitSound();
+	void playMenuBackSound();
+	void playMenuExitSound();
 
-	static void playMenuSelectSound();
-	static void playMenuHitSound();
-	static void playMenuBackSound();
-	static void playMenuExitSound();
+	void playGunSound();
+	void playShipExplosionSound();
+	void playAsteroidExplosionSound();
 
-	static void playShipExplosionSound();
-	static void playAsteroidExplosionSound();
-	static void playGunSound();
-	static void playPauseSound();
-	static void playHelpSound();
+	void playPauseSound();
+	void playHelpSound();
 
-	static void playGameOverSound();
-	static void playStageCompletedSound();
+	void playStageCompletedSound();
+	void playGameOverSound();
 };
 
 #endif

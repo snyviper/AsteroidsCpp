@@ -8,7 +8,7 @@
 #include "Asteroid.h"
 #include "Sounds.h"
 
-class Ship : Sounds
+class Ship
 {
 //private:
 	Position scopePosition;
@@ -17,6 +17,8 @@ class Ship : Sounds
 	static const int MAX_BULLETS = 3;
 	Bullet bullet[MAX_BULLETS];
 	int facing;
+
+	int bulletHitsAsteroid(std::vector<Asteroid>& asteroid, int index);
 
 public:
 	Ship();
@@ -37,7 +39,7 @@ public:
 
 	bool asteroidHitShip(std::vector<Asteroid>& asteroid);
 	int bulletsHitAsteroid(std::vector<Asteroid>& asteroid);
-	void shoot();
+	int shoot(std::vector<Asteroid>& asteroid);
 
 	bool bulletExists(int index);
 };

@@ -6,6 +6,7 @@ class Coords
 protected:
 	int x;
 	int y;
+
 public:
 	Coords();
 	Coords(int X, int Y);
