@@ -1,6 +1,7 @@
 #include "Space.h"
 #include "HUD.h"
 #include "Sounds.h"
+#include <windows.h>
 #include <conio.h>
 
 //private

@@ -1,7 +1,7 @@
 #include "Bullet.h"
 
 Bullet::Bullet() {
-	existance = false;
+	existence = false;
 	position = Position(0, 0);
 	speed = Speed(0, 0);
 	remainingFrames = 0;
@@ -46,14 +46,14 @@ void Bullet::newBullet(Position shipPosition, int facing) {
 			break;
 	}
 	remainingFrames = 25;
-	existance = true;
+	existence = true;
 }
 
 void Bullet::newFrame() {
-	if (existance) {
+	if (existence) {
 		remainingFrames--;
 		if (remainingFrames <= 0)
-			existance = false;
+			existence = false;
 		else
 			position.moveBullet(speed);
 	}
@@ -61,12 +61,12 @@ void Bullet::newFrame() {
 
 bool Bullet::hitAsteroid(Position positionAsteroid) {
 	if (position.equals(positionAsteroid)) {
-		existance = false;
+		existence = false;
 		remainingFrames = 0;
 		return true;
 	}
 	return false;
 }
 
-bool Bullet::exists() { return existance; }
+bool Bullet::exists() { return existence; }
 Position Bullet::getPosition(){ return position; }

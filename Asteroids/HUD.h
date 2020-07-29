@@ -1,9 +1,8 @@
 #ifndef HUD_H
 #define HUD_H
 
-#include "Cursor.h"
 #include "Ship.h"
-#include "Asteroid.h"
+//#include "Asteroid.h"
 
 namespace HUD
 {
@@ -39,14 +38,11 @@ namespace HUD
 
 	void printHUD(int hearts, int score, double fps);
 	void refreshHUD(double fps);
-	void startMainScreen();
 
 	void printHearts(int hearts);
 	void printScoreValue(int score);
-	void printFPSValue(double fps);
 
 	void printHelp();
-	void printHelpIcon();
 
 	void printPause();
 };

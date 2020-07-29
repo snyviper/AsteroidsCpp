@@ -1,6 +1,5 @@
 #include "Ship.h"
-#include <Windows.h>
-#include <string>
+#include "Sounds.h"
 #include <thread>
 
 //private:

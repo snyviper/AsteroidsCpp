@@ -1,8 +1,8 @@
 #include "HUD.h"
 #include "ScreenLimit.h"
+#include "Cursor.h"
 #include <iostream>
 #include <iomanip>
-#include <string>
 #include <conio.h>
 
 namespace HUD {
@@ -12,6 +12,14 @@ namespace HUD {
 		const char HELP_TOP_LEFT = 201, HELP_HORIZONTAL = 205, HELP_TOP_RIGHT = 187;
 		const char HELP_VERTICAL = 186, HELP_BOTTOM_LEFT = 200, HELP_BOTTOM_RIGHT = 188;
 
+		void printHelpIcon() {
+			Cursor::goToHelpIconTop();
+			std::cout << HELP_TOP_LEFT << HELP_HORIZONTAL << HELP_HORIZONTAL << HELP_HORIZONTAL << HELP_TOP_RIGHT;
+			Cursor::goToHelpIconMiddle();
+			std::cout << HELP_VERTICAL << " H " << HELP_VERTICAL;
+			Cursor::goToHelpIconBottom();
+			std::cout << HELP_BOTTOM_LEFT << HELP_HORIZONTAL << HELP_HORIZONTAL << HELP_HORIZONTAL << HELP_BOTTOM_RIGHT;
+		}
 		void cleanSpace() {
 			Cursor::goToSpace();
 			std::cout << ScreenLimit::getCleanSpace();
@@ -29,18 +37,23 @@ namespace HUD {
 		void printTopBorder() {
 			std::string topBorder = "";
 			Cursor::goToTopBorder();
-			for (int i = 0; i < ScreenLimit::getX(); i++) {
+			for (int i = 0; i < ScreenLimit::getX(); i++)
 				topBorder += '_';
-			}
 			std::cout << topBorder;
 		}
 		void printBottomBorder() {
 			std::string bottomBorder = "";
 			Cursor::goToBottomBorder();
-			for (int i = 0; i < ScreenLimit::getX() - 9; i++) {
+			for (int i = 0; i < ScreenLimit::getX() - 9; i++)
 				bottomBorder += BOTTOMBORDER;
-			}
 			std::cout << bottomBorder;
+		}
+		void printFPSValue(double fps) {
+			Cursor::goToFPS();
+			if (fps > 99.9)
+				std::cout << "99.9";
+			else
+				std::cout << std::internal << std::fixed << std::setprecision(1) << std::setfill('0') << std::setw(4) << fps;
 		}
 		void printFPSName(double fps) {
 			Cursor::goToFPSName();
@@ -64,10 +77,9 @@ namespace HUD {
 
 	void printMainScreen() {
 		system("cls");
-		Cursor::goToNewGame();
-		std::cout << "New Game";
-		Cursor::goToExit();
-		std::cout << "Exit";
+		printTitle();
+		printNewGame();
+		printExit();
 		printHelpIcon();
 	}
 	void printArrowNewGame() {
@@ -266,13 +278,6 @@ namespace HUD {
 		printFPSValue(fps);
 	}
 
-	void startMainScreen() {
-		printTitle();
-		printNewGame();
-		printExit();
-		printHelp();
-	}
-
 	void printHearts(int hearts) {
 		std::string allHearts = "";
 		Cursor::goToHearts();
@@ -286,14 +291,6 @@ namespace HUD {
 			std::cout << "999999";
 		else
 			std::cout << std::internal << std::setfill('0') << std::setw(6) << score;
-	}
-
-	void printFPSValue(double fps) {
-		Cursor::goToFPS();
-		if (fps > 99.9)
-			std::cout << "99.9";
-		else
-			std::cout << std::internal << std::fixed << std::setprecision(1) << std::setfill('0') << std::setw(4) << fps;
 	}
 
 	void printHelp() {
@@ -311,15 +308,6 @@ namespace HUD {
 		Cursor::goToHelpK();
 		std::cout << "k: shoot";
 		_getch();
-	}
-
-	void printHelpIcon() {
-		Cursor::goToHelpTop();
-		std::cout << HELP_TOP_LEFT << HELP_HORIZONTAL << HELP_HORIZONTAL << HELP_HORIZONTAL << HELP_TOP_RIGHT;
-		Cursor::goToHelpMiddle();
-		std::cout << HELP_VERTICAL << " H " << HELP_VERTICAL;
-		Cursor::goToHelpBottom();
-		std::cout << HELP_BOTTOM_LEFT << HELP_HORIZONTAL << HELP_HORIZONTAL << HELP_HORIZONTAL << HELP_BOTTOM_RIGHT;
 	}
 
 	void printPause() {

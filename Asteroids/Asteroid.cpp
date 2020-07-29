@@ -1,6 +1,5 @@
 #include "Asteroid.h"
 #include "ScreenLimit.h"
-#include <windows.h>
 #include <time.h>
 
 int Asteroid::s_RandAdd;

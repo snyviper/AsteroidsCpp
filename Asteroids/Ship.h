@@ -2,11 +2,10 @@
 #define SHIP_H
 
 #include <vector>
-#include "Position.h"
-#include "Speed.h"
+//#include "Position.h"
+//#include "Speed.h"
 #include "Bullet.h"
 #include "Asteroid.h"
-#include "Sounds.h"
 
 class Ship
 {

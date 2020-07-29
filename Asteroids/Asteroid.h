@@ -2,7 +2,7 @@
 #define ASTEROID_H
 
 #include "Position.h"
-#include "Speed.h"
+//#include "Speed.h"
 
 class Asteroid
 {
@@ -21,7 +21,7 @@ class Asteroid
 public:
 	Asteroid();
 	Asteroid(int difficulty);
-	Asteroid(int difficulty, Position Position);
+	Asteroid(int difficulty, Position positionParam);
 
 	void newSpeed(int difficulty);
 

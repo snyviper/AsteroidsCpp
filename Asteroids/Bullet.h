@@ -2,12 +2,12 @@
 #define BULLET_H
 
 #include "Position.h"
-#include "Speed.h"
+//#include "Speed.h"
 
 class Bullet
 {
 //private:
-	bool existance;
+	bool existence;
 	Position position;
 	Speed speed;
 	int remainingFrames;

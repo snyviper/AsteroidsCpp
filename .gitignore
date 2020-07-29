@@ -37,3 +37,7 @@ Asteroids/Debug/*
 x64/*
 .vs/*
 Asteroids/x64/*
+
+#misc ignore
+Asteroids/.vscode/*
+CodeGraphData/*

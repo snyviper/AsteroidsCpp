@@ -1,11 +1,9 @@
-// Este arquivo contém a função 'main'. A execução do programa começa e termina aqui.
-
 #include <conio.h>
+#include <windows.h>
 #include "Space.h"
 #include "HUD.h"
 #include "ScreenLimit.h"
-#include "Sounds.h"
-//#pragma comment(lib, "Kernel32.lib")
+//#include "Sounds.h"
 
 void showConsoleCursor(bool showFlag){
 	HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -203,49 +201,48 @@ int main()
 				break;
 		}
 	}
-	/*while (exit == 0) {
-		
-	}*/
-	/*cout << "Hello World!" << endl;
-	std::cout << "Hello World!\n";
-	int x = 0;
-	float cash = 2.32;
-	double credit = 32.32;
-	char a = 'a';
-	string sandwich = "ham";
-	bool does_she_like_me = true;
-	auto do_i_have_pants_on = false;
-	auto blank_check = 200.00;
-	cout << sandwich << endl;
-	cin >> x;
-	cout << x << endl;
-	cout << "sandwich type: ";
-	getline(cin, sandwich);
-	cout << "Creating " << sandwich << " sandwich!" << endl;
-	cout << "Press enter to exit...";
-	getline(cin, sandwich);*/
-
-	/*char x, y;
-	int max_num_char = 100;
-	x = cin.get();
-	cin.ignore(max_num_char, ' ');
-	y = cin.get();
-	cin.ignore(max_num_char, '\n');
-	cout << x << y << endl;
-	string z;
-	getline(cin, z);*/
-
-	/*string ham = "Ham";
-	string sandwich = "Sandwich";
-	ham.swap(sandwich);
-	ham.size();
-	ham.find('a');
-	ham[1];
-	string x = ham + sandwich;
-	sandwich += ham;*/
-
-	// 5 > 4 ? std::cout << 'a' : std::cout << 'b';
 }
+
+/*using namespace std;
+cout << "Hello World!" << endl;
+std::cout << "Hello World!\n";
+int x = 0;
+float cash = 2.32;
+double credit = 32.32;
+char a = 'a';
+string sandwich = "ham";
+bool does_she_like_me = true;
+auto do_i_have_pants_on = false;
+auto blank_check = 200.00;
+cout << sandwich << endl;
+cin >> x;
+cout << x << endl;
+cout << "sandwich type: ";
+getline(cin, sandwich);
+cout << "Creating " << sandwich << " sandwich!" << endl;
+cout << "Press enter to exit...";
+getline(cin, sandwich);*/
+
+/*char x, y;
+int max_num_char = 100;
+x = cin.get();
+cin.ignore(max_num_char, ' ');
+y = cin.get();
+cin.ignore(max_num_char, '\n');
+cout << x << y << endl;
+string z;
+getline(cin, z);*/
+
+/*string ham = "Ham";
+string sandwich = "Sandwich";
+ham.swap(sandwich);
+ham.size();
+ham.find('a');
+ham[1];
+string x = ham + sandwich;
+sandwich += ham;*/
+
+// 5 > 4 ? std::cout << 'a' : std::cout << 'b';
 
 // Executar programa: Ctrl + F5 ou Menu Depurar > Iniciar Sem Depuração
 // Depurar programa: F5 ou menu Depurar > Iniciar Depuração
