@@ -3,7 +3,7 @@
 #include "Space.h"
 #include "HUD.h"
 #include "ScreenLimit.h"
-//#include "Sounds.h"
+#include "Sounds.h"
 
 void showConsoleCursor(bool showFlag){
 	HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -240,7 +240,10 @@ ham.size();
 ham.find('a');
 ham[1];
 string x = ham + sandwich;
-sandwich += ham;*/
+sandwich += ham;
+
+std::thread tPlayAsteroidExplosionSound(Sounds::playAsteroidExplosionSound);
+tPlayAsteroidExplosionSound.detach();*/
 
 // 5 > 4 ? std::cout << 'a' : std::cout << 'b';
 

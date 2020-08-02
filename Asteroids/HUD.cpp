@@ -35,18 +35,12 @@ namespace HUD {
 			printScoreValue(score);
 		}
 		void printTopBorder() {
-			std::string topBorder = "";
 			Cursor::goToTopBorder();
-			for (int i = 0; i < ScreenLimit::getX(); i++)
-				topBorder += '_';
-			std::cout << topBorder;
+			std::cout << ScreenLimit::getTopBorder();
 		}
 		void printBottomBorder() {
-			std::string bottomBorder = "";
 			Cursor::goToBottomBorder();
-			for (int i = 0; i < ScreenLimit::getX() - 9; i++)
-				bottomBorder += BOTTOMBORDER;
-			std::cout << bottomBorder;
+			std::cout << ScreenLimit::getBottomBorder();
 		}
 		void printFPSValue(double fps) {
 			Cursor::goToFPS();

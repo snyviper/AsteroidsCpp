@@ -5,11 +5,13 @@
 
 namespace ScreenLimit {
 	void setLimits(int X, int Y);
-	unsigned int getSpaceX();
-	unsigned int getSpaceY();
-	unsigned int getX();
-	unsigned int getY();
+	int getSpaceX();
+	int getSpaceY();
+	int getX();
+	int getY();
 	std::string getCleanSpace();
+	std::string getTopBorder();
+	std::string getBottomBorder();
 }
 
 #endif

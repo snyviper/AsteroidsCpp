@@ -5,7 +5,6 @@
 #include <ctime>
 #include "Ship.h"
 #include "Asteroid.h"
-#include "Sounds.h"
 
 class Space
 {
@@ -34,6 +33,9 @@ class Space
 	void help(double fps);
 
 	double getFPS(clock_t refreshRate);
+
+	bool spaceHasBullets();
+	bool spaceHasAllBullets();
 
 	void beforeStartGame(int difficulty);
 	void startBattle(int difficulty);

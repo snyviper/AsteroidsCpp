@@ -40,4 +40,5 @@ Asteroids/x64/*
 
 #misc ignore
 Asteroids/.vscode/*
+Asteroids/out/*
 CodeGraphData/*

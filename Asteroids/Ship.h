@@ -23,7 +23,7 @@ public:
 	Ship();
 	void resetShip();
 
-	void newFrame(int frame);
+	void newShipFrame(int frame);
 	void newBulletsFrame();
 
 	Position getPosition();

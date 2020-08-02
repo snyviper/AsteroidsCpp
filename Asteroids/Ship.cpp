@@ -1,6 +1,4 @@
 #include "Ship.h"
-#include "Sounds.h"
-#include <thread>
 
 //private:
 int Ship::bulletHitsAsteroid(std::vector<Asteroid>& asteroid, int index) {
@@ -8,16 +6,12 @@ int Ship::bulletHitsAsteroid(std::vector<Asteroid>& asteroid, int index) {
 		if (asteroid.at(j).isBig()) {
 			for (int k = 0; k < 9; k++) {
 				if (bullet[index].hitAsteroid(asteroid.at(j).getPositionBig()[k])) {
-					std::thread tPlayAsteroidExplosionSound(Sounds::playAsteroidExplosionSound);
-					tPlayAsteroidExplosionSound.detach();
 					return j;
 				}
 			}
 		}
 		else {
 			if (bullet[index].hitAsteroid(asteroid.at(j).getPositionSmall())) {
-				std::thread tPlayAsteroidExplosionEffect(Sounds::playAsteroidExplosionSound);
-				tPlayAsteroidExplosionEffect.detach();
 				return j;
 			}
 		}
@@ -28,9 +22,8 @@ int Ship::bulletHitsAsteroid(std::vector<Asteroid>& asteroid, int index) {
 //public:
 Ship::Ship() {
 	resetShip();
-	for (int index = 0; index < MAX_BULLETS; index++) {
+	for (int index = 0; index < MAX_BULLETS; index++)
 		bullet[index] = Bullet();
-	}
 }
 void Ship::resetShip() {
 	position.setPositionShipStart();
@@ -39,24 +32,20 @@ void Ship::resetShip() {
 	facing = 0;
 }
 
-void Ship::newFrame(int frame) {
+void Ship::newShipFrame(int frame) {
 	position.move(speed, frame);
 	scopePosition.move(speed, frame);
-	newBulletsFrame();
 }
 void Ship::newBulletsFrame() {
-	for (int index = 0; index < MAX_BULLETS; index++) {
+	for (int index = 0; index < MAX_BULLETS; index++)
 		bullet[index].newFrame();
-	}
 }
 
 Position Ship::getPosition() { return position; }
 Position Ship::getScopePosition() { return scopePosition; }
 int Ship::getFacing() { return facing; }
 int Ship::getMaxBullets() { return MAX_BULLETS; }
-Bullet Ship::getBullet(int index) {
-	return bullet[index];
-}
+Bullet Ship::getBullet(int index) { return bullet[index]; }
 
 void Ship::turnRight() {
 	if (facing == 7)
@@ -79,16 +68,12 @@ bool Ship::asteroidHitShip(std::vector<Asteroid>& asteroid) {
 		if (asteroid.at(i).isBig()) {
 			for (int j = 0; j < 9; j++) {
 				if (position.equals(asteroid.at(i).getPositionBig()[j]) || scopePosition.equals(asteroid.at(i).getPositionBig()[j])) {
-					std::thread tPlayShipExplosionSound(Sounds::playShipExplosionSound);
-					tPlayShipExplosionSound.detach();
 					return true;
 				}
 			}
 		}
 		else {
 			if (position.equals(asteroid.at(i).getPositionSmall()) || scopePosition.equals(asteroid.at(i).getPositionSmall())) {
-				std::thread tPlayShipExplosionSound(Sounds::playShipExplosionSound);
-				tPlayShipExplosionSound.detach();
 				return true;
 			}
 		}
@@ -101,19 +86,13 @@ int Ship::bulletsHitAsteroid(std::vector<Asteroid>& asteroid) {
 			for (int j = 0; j < asteroid.size(); j++) {
 				if (asteroid.at(j).isBig()) {
 					for (int k = 0; k < 9; k++) {
-						if (bullet[i].hitAsteroid(asteroid.at(j).getPositionBig()[k])) {
-							std::thread tPlayAsteroidExplosionSound(Sounds::playAsteroidExplosionSound);
-							tPlayAsteroidExplosionSound.detach();
+						if (bullet[i].hitAsteroid(asteroid.at(j).getPositionBig()[k]))
 							return j;
-						}
 					}
 				}
 				else {
-					if (bullet[i].hitAsteroid(asteroid.at(j).getPositionSmall())) {
-						std::thread tPlayAsteroidExplosionEffect(Sounds::playAsteroidExplosionSound);
-						tPlayAsteroidExplosionEffect.detach();
+					if (bullet[i].hitAsteroid(asteroid.at(j).getPositionSmall()))
 						return j;
-					}
 				}
 			}
 		}
@@ -125,11 +104,6 @@ int Ship::shoot(std::vector<Asteroid>& asteroid) {
 	for (int index = 0; index < MAX_BULLETS; index++) {
 		if (!bullet[index].exists()) {
 			bullet[index].newBullet(position, facing);
-
-			//create thread
-			std::thread tPlayShipGunSoundEffect(Sounds::playGunSound);
-			tPlayShipGunSoundEffect.detach();
-
 			return bulletHitsAsteroid(asteroid, index);
 		}
 	}
