@@ -100,7 +100,7 @@ double Space::getFPS(clock_t refreshRate) {
 	return 1 / (((double)refreshRate) / CLOCKS_PER_SEC);
 }
 
-bool Space::spaceHasBullets(){
+bool Space::spaceHasAnyBullet(){
 	for(int i = 0; i < ship.getMaxBullets(); i++)
 		if(ship.bulletExists(i))
 			return true;
@@ -117,7 +117,7 @@ bool Space::spaceHasAllBullets() {
 
 void Space::beforeStartGame(int difficulty) {
 	char key = 'a';
-	bool showShip = false, start = false, hasBullet = spaceHasBullets();
+	bool showShip = false, start = false, hasBullet = spaceHasAnyBullet();
 	bool* pShowShip = &showShip;
 	clock_t refreshRate;
 	double fps = 0;
@@ -133,7 +133,7 @@ void Space::beforeStartGame(int difficulty) {
 		HUD::printInstructionsStart();
 		if(hasBullet){
 			ship.newBulletsFrame();
-			if(hasBullet = spaceHasBullets()){
+			if(hasBullet = spaceHasAnyBullet()){
 				damageAsteroid(ship.bulletsHitAsteroid(asteroid), difficulty);
 				if (asteroid.size() == 0)
 					start = true;
@@ -196,12 +196,10 @@ void Space::startBattle(int difficulty) {
 		}
 		ship.newShipFrame(frame);
 		HUD::printShip(ship);
-		if (spaceHasBullets()) {
+		if (spaceHasAnyBullet()) {
 			ship.newBulletsFrame();
-			if (spaceHasBullets()) {
-				printBullets();
-				damageAsteroid(ship.bulletsHitAsteroid(asteroid), difficulty);
-			}
+			printBullets();
+			damageAsteroid(ship.bulletsHitAsteroid(asteroid), difficulty);
 		}
 		shipHit = asteroidHitShip();
 		fps = getFPS(refreshRate);

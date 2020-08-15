@@ -34,7 +34,7 @@ class Space
 
 	double getFPS(clock_t refreshRate);
 
-	bool spaceHasBullets();
+	bool spaceHasAnyBullet();
 	bool spaceHasAllBullets();
 
 	void beforeStartGame(int difficulty);

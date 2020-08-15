@@ -24,12 +24,10 @@ namespace ScreenLimit {
 				}
 				cleanSpace += "\n";
 			}
-			for (int i = 0; i < getSpaceX(); i++) {
+			for (int i = 0; i < getSpaceX(); i++)
 				topBorder += "_";
-			}
-			for (int i = 0; i < getSpaceX() - 9; i++) {
+			for (int i = 0; i < getSpaceX() - 9; i++)
 				bottomBorder += BOTTOMBORDER;
-			}
 		}
 	}
 
