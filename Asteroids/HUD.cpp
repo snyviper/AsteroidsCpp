@@ -5,10 +5,13 @@
 #include <iomanip>
 #include <conio.h>
 
-namespace HUD {
-	namespace {
-		const char ARROW = 175, BOTTOMBORDER = 238, ASTEROID = 219, HEART = 3, BULLET = 250;
-		const char SHIP_BODY = 'O', FACE_HORIZONTAL = 196, FACE_VERTICAL = '|', FACE_135_DEGREES = '\\', FACE_45_DEGREES = '/';
+namespace HUD
+{
+	namespace
+	{
+		const char ARROW = 175, ASTEROID = 219, HEART = 3, BULLET = 250;
+		const char SHIP_BODY = 'O', FACE_HORIZONTAL = 196, FACE_VERTICAL = '|';
+		const char FACE_DIAGONAL_LEFT = '\\', FACE_DIAGONAL_RIGHT = '/';
 		const char HELP_TOP_LEFT = 201, HELP_HORIZONTAL = 205, HELP_TOP_RIGHT = 187;
 		const char HELP_VERTICAL = 186, HELP_BOTTOM_LEFT = 200, HELP_BOTTOM_RIGHT = 188;
 
@@ -20,14 +23,17 @@ namespace HUD {
 			Cursor::goToHelpIconBottom();
 			std::cout << HELP_BOTTOM_LEFT << HELP_HORIZONTAL << HELP_HORIZONTAL << HELP_HORIZONTAL << HELP_BOTTOM_RIGHT;
 		}
+		void cleanScreen() {
+			Cursor::goToStart();
+			std::cout << ScreenLimit::getCleanScreen();
+		}
 		void cleanSpace() {
 			Cursor::goToSpace();
 			std::cout << ScreenLimit::getCleanSpace();
 		}
-		void printHealth(int hearts) {
+		void printHealth() {
 			Cursor::goToHealth();
 			std::cout << "Health:";
-			printHearts(hearts);
 		}
 		void printScoreName(int score) {
 			Cursor::goToScoreWord(6);
@@ -49,10 +55,9 @@ namespace HUD {
 			else
 				std::cout << std::internal << std::fixed << std::setprecision(1) << std::setfill('0') << std::setw(4) << fps;
 		}
-		void printFPSName(double fps) {
+		void printFPSName() {
 			Cursor::goToFPSName();
 			std::cout << "FPS:";
-			printFPSValue(fps);
 		}
 
 		void printTitle() {
@@ -70,7 +75,7 @@ namespace HUD {
 	}
 
 	void printMainScreen() {
-		system("cls");
+		cleanScreen();
 		printTitle();
 		printNewGame();
 		printExit();
@@ -94,7 +99,7 @@ namespace HUD {
 	}
 
 	void printDifficultySelection() {
-		system("cls");
+		cleanScreen();
 		Cursor::goToSelectDifficulty();
 		std::cout << "Select Difficulty";
 		Cursor::goToDifficultyEasy();
@@ -176,25 +181,25 @@ namespace HUD {
 			std::cout << FACE_VERTICAL;
 			break;
 		case 1:
-			std::cout << FACE_45_DEGREES;
+			std::cout << FACE_DIAGONAL_RIGHT;
 			break;
 		case 2:
 			std::cout << FACE_HORIZONTAL;
 			break;
 		case 3:
-			std::cout << FACE_135_DEGREES;
+			std::cout << FACE_DIAGONAL_LEFT;
 			break;
 		case 4:
 			std::cout << FACE_VERTICAL;
 			break;
 		case 5:
-			std::cout << FACE_45_DEGREES;
+			std::cout << FACE_DIAGONAL_RIGHT;
 			break;
 		case 6:
 			std::cout << FACE_HORIZONTAL;
 			break;
 		case 7:
-			std::cout << FACE_135_DEGREES;
+			std::cout << FACE_DIAGONAL_LEFT;
 			break;
 		}
 	}
@@ -260,11 +265,13 @@ namespace HUD {
 	}
 
 	void printHUD(int hearts, int score, double fps) {
-		system("cls");
-		printHealth(hearts);
+		cleanScreen();
+		printHealth();
+		printHearts(hearts);
 		printTopBorder();
 		printScoreName(score);
-		printFPSName(fps);
+		printFPSName();
+		printFPSValue(fps);
 		printBottomBorder();
 	}
 	void refreshHUD(double fps) {
@@ -288,7 +295,7 @@ namespace HUD {
 	}
 
 	void printHelp() {
-		system("cls");
+		cleanScreen();
 		Cursor::goToHelpW();
 		std::cout << "w: move up in menu / accelerate";
 		Cursor::goToHelpS();

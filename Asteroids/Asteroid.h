@@ -7,9 +7,9 @@
 class Asteroid
 {
 //private:
-	Position position[9];
-	Speed speed;
-	bool big;
+	Position _position[9];
+	Speed _speed;
+	bool _big;
 	static int s_RandAdd;
 
 	void changeRandomSeed();

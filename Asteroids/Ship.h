@@ -15,7 +15,7 @@ class Ship
 	Speed speed;
 	static const int MAX_BULLETS = 3;
 	Bullet bullet[MAX_BULLETS];
-	int facing;
+	int _facing;
 
 	int bulletHitsAsteroid(std::vector<Asteroid>& asteroid, int index);
 

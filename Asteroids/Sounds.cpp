@@ -2,7 +2,8 @@
 #include <Windows.h>
 #pragma comment(lib, "winmm.lib")
 
-namespace Sounds {
+namespace Sounds
+{
 	void playMenuSelectSound() {
 		PlaySound(TEXT("MenuSelect.wav"), NULL, SND_ASYNC);
 	}

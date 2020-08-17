@@ -22,14 +22,14 @@ int Ship::bulletHitsAsteroid(std::vector<Asteroid>& asteroid, int index) {
 //public:
 Ship::Ship() {
 	resetShip();
-	for (int index = 0; index < MAX_BULLETS; index++)
-		bullet[index] = Bullet();
+	for (int i = 0; i < MAX_BULLETS; i++)
+		bullet[i] = Bullet();
 }
 void Ship::resetShip() {
 	position.setPositionShipStart();
 	scopePosition.setPositionScopeStart();
 	speed.setSpeed(0, 0);
-	facing = 0;
+	_facing = 0;
 }
 
 void Ship::newShipFrame(int frame) {
@@ -37,31 +37,31 @@ void Ship::newShipFrame(int frame) {
 	scopePosition.move(speed, frame);
 }
 void Ship::newBulletsFrame() {
-	for (int index = 0; index < MAX_BULLETS; index++)
-		bullet[index].newFrame();
+	for (int i = 0; i < MAX_BULLETS; i++)
+		bullet[i].newFrame();
 }
 
 Position Ship::getPosition() { return position; }
 Position Ship::getScopePosition() { return scopePosition; }
-int Ship::getFacing() { return facing; }
+int Ship::getFacing() { return _facing; }
 int Ship::getMaxBullets() { return MAX_BULLETS; }
 Bullet Ship::getBullet(int index) { return bullet[index]; }
 
 void Ship::turnRight() {
-	if (facing == 7)
-		facing = 0;
+	if (_facing == 7)
+		_facing = 0;
 	else
-		facing++;
-	scopePosition.scopeMoveRight(facing);
+		_facing++;
+	scopePosition.scopeMoveRight(_facing);
 }
 void Ship::turnLeft() {
-	if (facing == 0)
-		facing = 7;
+	if (_facing == 0)
+		_facing = 7;
 	else
-		facing--;
-	scopePosition.scopeMoveLeft(facing);
+		_facing--;
+	scopePosition.scopeMoveLeft(_facing);
 }
-void Ship::accelerate() { speed.accelerate(facing); }
+void Ship::accelerate() { speed.accelerate(_facing); }
 
 bool Ship::asteroidHitShip(std::vector<Asteroid>& asteroid) {
 	for (int i = 0; i < asteroid.size(); i++) {
@@ -100,11 +100,10 @@ int Ship::bulletsHitAsteroid(std::vector<Asteroid>& asteroid) {
 	return -1;
 }
 int Ship::shoot(std::vector<Asteroid>& asteroid) {
-	int asteroidIndex;
-	for (int index = 0; index < MAX_BULLETS; index++) {
-		if (!bullet[index].exists()) {
-			bullet[index].newBullet(position, facing);
-			return bulletHitsAsteroid(asteroid, index);
+	for (int i = 0; i < MAX_BULLETS; i++) {
+		if (!bullet[i].exists()) {
+			bullet[i].newBullet(position, _facing);
+			return bulletHitsAsteroid(asteroid, i);
 		}
 	}
 	return -1;

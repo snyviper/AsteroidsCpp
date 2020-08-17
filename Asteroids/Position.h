@@ -11,9 +11,9 @@ class Position : public Coords
 
 public:
 	Position();
-	Position(int X, int Y);
+	Position(int x, int y);
 
-	void setPosition(int X, int Y);
+	void setPosition(int x, int y);
 	void setPositionShipStart();
 	void setPositionScopeStart();
 	void plusOneXY();

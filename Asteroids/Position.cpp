@@ -3,62 +3,61 @@
 
 //private
 void Position::verifyLimit() {
-	if (x < 0)
-		x += ScreenLimit::getSpaceX();
-	else if (x >= ScreenLimit::getSpaceX())
-		x -= ScreenLimit::getSpaceX();
-	if (y < 0)
-		y += ScreenLimit::getSpaceY();
-	else if (y >= ScreenLimit::getSpaceY())
-		y -= ScreenLimit::getSpaceY();
+	if (_x < 0)
+		_x += ScreenLimit::getSpaceX();
+	else if (_x >= ScreenLimit::getSpaceX())
+		_x -= ScreenLimit::getSpaceX();
+	if (_y < 0)
+		_y += ScreenLimit::getSpaceY();
+	else if (_y >= ScreenLimit::getSpaceY())
+		_y -= ScreenLimit::getSpaceY();
 }
 
 //public
-
 Position::Position() {}
-Position::Position(int X, int Y) {
-	setPosition(X, Y);
+Position::Position(int x, int y) {
+	setPosition(x, y);
 }
 
-void Position::setPosition(int X, int Y) {
-	x = X;
-	y = Y;
+void Position::setPosition(int x, int y) {
+	_x = x;
+	_y = y;
 	verifyLimit();
 }
 void Position::setPositionShipStart() {
-	x = ScreenLimit::getSpaceX() / 2;
-	y = ScreenLimit::getSpaceY() / 2;
+	_x = ScreenLimit::getSpaceX() / 2;
+	_y = ScreenLimit::getSpaceY() / 2;
 }
 void Position::setPositionScopeStart() {
-	x = ScreenLimit::getSpaceX() / 2;
-	y = (ScreenLimit::getSpaceY() / 2) - 1;
+	_x = ScreenLimit::getSpaceX() / 2;
+	_y = (ScreenLimit::getSpaceY() / 2) - 1;
 }
 void Position::plusOneXY() {
-	setPosition(x + 1, y + 1);
+	setPosition(_x + 1, _y + 1);
 }
 
 bool Position::equals(Position position) {
-	return x == position.getX() && y == position.getY();
+	return _x == position.getX() && _y == position.getY();
 }
 
 void Position::move(Speed speed, int frame) {
 	if (speed.getX() != 0 && frame % speed.getX() == 0) {
 		if (speed.getX() > 0)
-			x++;
+			_x++;
 		else
-			x--;
+			_x--;
 	}
 	if (speed.getY() != 0 && frame % speed.getY() == 0) {
 		if (speed.getY() > 0)
-			y++;
+			_y++;
 		else
-			y--;
+			_y--;
 	}
 	verifyLimit();
 }
 void Position::moveBullet(Speed speed) {
-	x += speed.getX();
-	y += speed.getY();
+	_x += speed.getX();
+	_y += speed.getY();
 	verifyLimit();
 }
 
@@ -69,28 +68,28 @@ void Position::scopeMoveLeft(int facing) {
 	// 5 4 3
 	switch (facing) {
 	case 0:
-		x--;
+		_x--;
 		break;
 	case 1:
-		y--;
+		_y--;
 		break;
 	case 2:
-		y--;
+		_y--;
 		break;
 	case 3:
-		x++;
+		_x++;
 		break;
 	case 4:
-		x++;
+		_x++;
 		break;
 	case 5:
-		y++;
+		_y++;
 		break;
 	case 6:
-		y++;
+		_y++;
 		break;
 	case 7:
-		x--;
+		_x--;
 		break;
 	}
 	verifyLimit();
@@ -102,28 +101,28 @@ void Position::scopeMoveRight(int facing) {
 	// 5 4 3
 	switch (facing) {
 	case 0:
-		x++;
+		_x++;
 		break;
 	case 1:
-		x++;
+		_x++;
 		break;
 	case 2:
-		y++;
+		_y++;
 		break;
 	case 3:
-		y++;
+		_y++;
 		break;
 	case 4:
-		x--;
+		_x--;
 		break;
 	case 5:
-		x--;
+		_x--;
 		break;
 	case 6:
-		y--;
+		_y--;
 		break;
 	case 7:
-		y--;
+		_y--;
 		break;
 	}
 	verifyLimit();

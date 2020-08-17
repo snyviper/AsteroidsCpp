@@ -4,15 +4,15 @@
 class Coords
 {
 protected:
-	int x;
-	int y;
+	int _x;
+	int _y;
 
 public:
 	Coords();
-	Coords(int X, int Y);
+	Coords(int x, int y);
 
 	bool equals(Coords coords);
-	bool equals(int X, int Y);
+	bool equals(int x, int y);
 
 	int getX();
 	int getY();

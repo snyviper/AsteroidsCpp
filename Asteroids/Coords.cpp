@@ -3,18 +3,15 @@
 //protected:
 
 //public:
-Coords::Coords() {
-	x = 0;
-	y = 0;
+Coords::Coords() : _x(0), _y(0) {
+
 }
-Coords::Coords(int X, int Y) {
-	x = X;
-	y = Y;
+Coords::Coords(int x, int y) : _x(x), _y(y) {
+	
 }
 
-bool Coords::equals(Coords coords) { return x == coords.getX() && y == coords.getY(); }
-bool Coords::equals(int X, int Y) { return x == X && y == Y; }
+bool Coords::equals(Coords coords) { return _x == coords.getX() && _y == coords.getY(); }
+bool Coords::equals(int x, int y) { return _x == x && _y == y; }
 
-int Coords::getX() { return x; }
-int Coords::getY() { return y; }
-
+int Coords::getX() { return _x; }
+int Coords::getY() { return _y; }

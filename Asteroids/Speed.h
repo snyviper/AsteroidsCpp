@@ -11,8 +11,8 @@ class Speed : public Coords
 
 public:
 	Speed();
-	Speed(int X, int Y);
-	void setSpeed(int X, int Y);
+	Speed(int x, int y);
+	void setSpeed(int x, int y);
 
 	bool equals(Speed speed);
 

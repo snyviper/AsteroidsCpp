@@ -17,6 +17,6 @@ namespace Sounds
 
 	void playStageCompletedSound();
 	void playGameOverSound();
-};
+}
 
 #endif

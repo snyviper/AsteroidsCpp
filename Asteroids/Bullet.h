@@ -7,10 +7,10 @@
 class Bullet
 {
 //private:
-	bool existence;
-	Position position;
-	Speed speed;
-	int remainingFrames;
+	bool _existence;
+	Position _position;
+	Speed _speed;
+	int _remainingFrames;
 
 public:
 	Bullet();

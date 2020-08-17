@@ -23,19 +23,18 @@ int main()
 {
 	ScreenLimit::setLimits(128, 45);
 	Space space;
-	char key;
 	bool exit = false;
 	bool exitDifficulty;
 	int arrowMainScreen = 0;
 	int arrowDifficulty;
+	const double MAX_FPS = 12.0;
 	showConsoleCursor(false);
 	HUD::printMainScreen();
 	while (!exit) {
 		switch (arrowMainScreen) {
 			case 0:
 				HUD::printArrowNewGame();
-				key = _getch();
-				switch (key) {
+				switch (_getch()) {
 					case 's': // down arrow
 						HUD::unprintArrowNewGame();
 						arrowMainScreen = 1;
@@ -50,17 +49,16 @@ int main()
 							switch (arrowDifficulty) {
 								case 0: // easy
 									HUD::printDifficultyArrowEasy();
-									key = _getch();
-									switch (key) {
+									switch (_getch()) {
 										case 's': // go down
 											HUD::unprintDifficultyArrowEasy();
 											arrowDifficulty++;
 											Sounds::playMenuSelectSound();
 											break;
 										case 'j': // start game
-											space = Space(arrowDifficulty);
+											space = Space(arrowDifficulty, MAX_FPS);
 											Sounds::playMenuHitSound();
-											space.game(arrowDifficulty);
+											space.game();
 											exitDifficulty = true;
 											HUD::printMainScreen();
 											break;
@@ -72,8 +70,7 @@ int main()
 									break;
 								case 1: // normal
 									HUD::printDifficultyArrowNormal();
-									key = _getch();
-									switch (key) {
+									switch (_getch()) {
 										case 'w': // go up
 											HUD::unprintDifficultyArrowNormal();
 											arrowDifficulty--;
@@ -85,9 +82,9 @@ int main()
 											Sounds::playMenuSelectSound();
 											break;
 										case 'j': // start game
-											space = Space(arrowDifficulty);
+											space = Space(arrowDifficulty, MAX_FPS);
 											Sounds::playMenuHitSound();
-											space.game(arrowDifficulty);
+											space.game();
 											exitDifficulty = true;
 											HUD::printMainScreen();
 											break;
@@ -99,8 +96,7 @@ int main()
 									break;
 								case 2: // hard
 									HUD::printDifficultyArrowHard();
-									key = _getch();
-									switch (key) {
+									switch (_getch()) {
 										case 'w': // go up
 											HUD::unprintDifficultyArrowHard();
 											arrowDifficulty--;
@@ -112,9 +108,9 @@ int main()
 											Sounds::playMenuSelectSound();
 											break;
 										case 'j': // start game
-											space = Space(arrowDifficulty);
+											space = Space(arrowDifficulty, MAX_FPS);
 											Sounds::playMenuHitSound();
-											space.game(arrowDifficulty);
+											space.game();
 											exitDifficulty = true;
 											HUD::printMainScreen();
 											break;
@@ -126,8 +122,7 @@ int main()
 									break;
 								case 3: // extreme
 									HUD::printDifficultyArrowExtreme();
-									key = _getch();
-									switch (key) {
+									switch (_getch()) {
 										case 'w': // go up
 											HUD::unprintDifficultyArrowExtreme();
 											arrowDifficulty--;
@@ -139,9 +134,9 @@ int main()
 											Sounds::playMenuSelectSound();
 											break;
 										case 'j': // start game
-											space = Space(arrowDifficulty);
+											space = Space(arrowDifficulty, MAX_FPS);
 											Sounds::playMenuHitSound();
-											space.game(arrowDifficulty);
+											space.game();
 											exitDifficulty = true;
 											HUD::printMainScreen();
 											break;
@@ -153,8 +148,7 @@ int main()
 									break;
 								case 4: // back
 									HUD::printDifficultyArrowBack();
-									key = _getch();
-									switch (key) {
+									switch (_getch()) {
 										case 'w': // go up
 											HUD::unprintDifficultyArrowBack();
 											arrowDifficulty--;
@@ -182,8 +176,7 @@ int main()
 				break;
 			case 1:
 				HUD::printArrowExit();
-				key = _getch();
-				switch (key) {
+				switch (_getch()) {
 					case 'w': // up arrow
 						HUD::unprintArrowExit();
 						arrowMainScreen = 0;
@@ -201,6 +194,7 @@ int main()
 				break;
 		}
 	}
+	return 0;
 }
 
 /*using namespace std;

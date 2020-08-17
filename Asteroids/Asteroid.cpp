@@ -105,40 +105,42 @@ int Asteroid::randomSpeed(int difficulty) {
 Asteroid::Asteroid() { }
 
 Asteroid::Asteroid(int difficulty) { // creates a big asteroid
-	big = true;
+	_big = true;
 	int x = randomPosition(ScreenLimit::getSpaceX()), y = randomPosition(ScreenLimit::getSpaceY());
 	for (int i = -1, index = 0; i <= 1; i++) {
-		for (int j = -1; j <= 1; j++, index++)
-			position[index].setPosition(x + j, y + i);
+		for (int j = -1; j <= 1; j++, index++) {
+			_position[index].setPosition(x + j, y + i);
+		}
 	}
-	speed = Speed(randomSpeed(difficulty), randomSpeed(difficulty));
+	_speed = Speed(randomSpeed(difficulty), randomSpeed(difficulty));
 }
 Asteroid::Asteroid(int difficulty, Position positionParam) { // creates a small asteroid
-	big = false;
-	position[0] = positionParam;
-	speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
+	_big = false;
+	_position[0] = positionParam;
+	_speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
 }
 
 void Asteroid::newSpeed(int difficulty) {
-	speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
+	_speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
 }
 
 void Asteroid::newFrame(int frame) {
-	if (big) {
-		for (int index = 0; index < 9; index++)
-			position[index].move(speed, frame);
+	if (_big) {
+		for (int i = 0; i < 9; i++) {
+			_position[i].move(_speed, frame);
+		}
 	}
 	else
-		position[0].move(speed, frame);
+		_position[0].move(_speed, frame);
 }
 
 void Asteroid::turnSmall(int difficulty) {
-	big = false;
-	position[0].plusOneXY();
-	speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
+	_big = false;
+	_position[0].plusOneXY();
+	_speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
 }
 
-bool Asteroid::isBig() { return big; }
-Position Asteroid::getPositionSmall() { return position[0]; }
-Position* Asteroid::getPositionBig() { return position; }
-Speed Asteroid::getSpeed() { return speed; }
+bool Asteroid::isBig() { return _big; }
+Position Asteroid::getPositionSmall() { return _position[0]; }
+Position* Asteroid::getPositionBig() { return _position; }
+Speed Asteroid::getSpeed() { return _speed; }

@@ -2,7 +2,8 @@
 #include "ScreenLimit.h"
 #include <Windows.h>
 
-namespace Cursor {
+namespace Cursor
+{
 	namespace { COORD cursor; }
 
 	//Space
@@ -12,12 +13,12 @@ namespace Cursor {
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
 	}
 
-	void goToXY(unsigned int x, unsigned int y) {
+	void goToXY(int x, int y) {
 		if (x < ScreenLimit::getSpaceX() && y < ScreenLimit::getSpaceY()) {
 			cursor.X = x;
 			cursor.Y = y + 2;
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
-			}
+		}
 	}
 	void goToPosition(Position position) {
 		if (position.getX() < ScreenLimit::getSpaceX() && position.getY() < ScreenLimit::getSpaceY()) {
@@ -133,6 +134,11 @@ namespace Cursor {
 	}
 
 	//Menu
+	void goToStart() {
+		cursor.X = 0;
+		cursor.Y = 0;
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
+	}
 	void goToTitle() {
 		cursor.X = (ScreenLimit::getX()/2)-6;
 		cursor.Y = (ScreenLimit::getY()/2)-4;
@@ -232,4 +238,4 @@ namespace Cursor {
 		cursor.X -= 2;
 		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursor);
 	}
-};
+}

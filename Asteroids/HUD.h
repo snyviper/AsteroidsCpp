@@ -45,6 +45,6 @@ namespace HUD
 	void printHelp();
 
 	void printPause();
-};
+}
 
 #endif

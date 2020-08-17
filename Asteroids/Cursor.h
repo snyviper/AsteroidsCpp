@@ -3,11 +3,12 @@
 
 #include "Position.h"
 
-namespace Cursor {
+namespace Cursor
+{
 	//Space
 	void goToSpace();
 
-	void goToXY(unsigned int x, unsigned int y);
+	void goToXY(int x, int y);
 	void goToPosition(Position position);
 
 	//HUD
@@ -37,6 +38,8 @@ namespace Cursor {
 	void goToHelpK();
 
 	//Menu
+	void goToStart();
+	
 	void goToTitle();
 	void goToNewGame();
 	void goToExit();
@@ -60,6 +63,6 @@ namespace Cursor {
 	void goToDifficultyArrowHard();
 	void goToDifficultyArrowExtreme();
 	void goToDifficultyArrowBack();
-};
+}
 
 #endif

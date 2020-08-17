@@ -9,17 +9,15 @@
 class Space
 {
 //private
-	int frame;
-	int stage;
-	int hearts;
-	int score;
-	Ship ship;
-	std::vector<Asteroid> asteroid;
+	Ship _ship;
+	std::vector<Asteroid> _asteroid;
+	int _difficulty, _stage, _frame, _hearts, _score;
+	double MAX_FPS, MAX_REFRESH_RATE; // in order to make these "const", Main.cpp has to be rewritten to accomodate this change
 
 	void nextFrame();
 
-	void resetAsteroids(int difficulty);
-	void damageAsteroid(int index, int difficulty);
+	void resetAsteroids();
+	void damageAsteroid(int index);
 
 	bool asteroidHitShip();
 
@@ -37,27 +35,26 @@ class Space
 	bool spaceHasAnyBullet();
 	bool spaceHasAllBullets();
 
-	void beforeStartGame(int difficulty);
-	void startBattle(int difficulty);
+	void beforeStartBattle();
+	void startBattle();
 
-	void newStage(int difficulty);
+	void newStage();
 
-	void setHearts(int difficulty);
-	int getHearts();
+	void setHearts();
 	void removeHeart();
 	void addHeart();
 
-	void addScoreAsteroidSmall(int difficulty, int stage);
-	void addScoreAsteroidBig(int difficulty, int stage);
-	void addScoreClearAsteroids(int difficulty, int stage);
+	void addScoreAsteroidSmall();
+	void addScoreAsteroidBig();
+	void addScoreClearAsteroids();
 
 	void pauseGame(double fps);
 
 public:
 	Space();
-	Space(int difficulty);
+	Space(int difficulty, double maxFps);
 
-	void game(int difficulty);
+	void game();
 };
 
 #endif
