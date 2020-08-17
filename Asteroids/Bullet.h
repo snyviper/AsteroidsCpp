@@ -20,8 +20,8 @@ public:
 
 	bool hitAsteroid(Position positionAsteroid);
 
-	bool exists();
-	Position getPosition();
+	bool exists() const;
+	Position getPosition() const;
 };
 
 #endif

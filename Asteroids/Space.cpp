@@ -69,29 +69,29 @@ void Space::movePrintAsteroids() {
 		HUD::printAsteroid(_asteroid.at(i));
 	}
 }
-void Space::printAsteroids() {
+void Space::printAsteroids() const {
 	for (int i = 0; i < _asteroid.size(); i++)
 		HUD::printAsteroid(_asteroid.at(i));
 }
 
-void Space::printBullets() {
+void Space::printBullets() const {
 	for (int i = 0; i < _ship.getMaxBullets(); i++)
 		if (_ship.bulletExists(i))
 			HUD::printBullet(_ship.getBullet(i));
 }
 
 void Space::damageShip() {
-	removeHeart();
+	_hearts--;
 }
 
-void Space::help(double fps) {
+void Space::help(double fps) const {
 	Sounds::playHelpSound();
 	HUD::printHelp();
 	Sounds::playHelpSound();
 	HUD::printHUD(_hearts, _score, fps);
 }
 
-double Space::getFPS(clock_t refreshRate) {
+double Space::getFPS(clock_t refreshRate) const {
 	refreshRate = clock() - refreshRate;
 	double refreshRateDouble = (MAX_REFRESH_RATE - ((double)refreshRate) / CLOCKS_PER_SEC) * 1000;
 	if (refreshRateDouble > 0) {
@@ -101,7 +101,7 @@ double Space::getFPS(clock_t refreshRate) {
 	return 1 / (((double)refreshRate) / CLOCKS_PER_SEC);
 }
 
-bool Space::spaceHasAnyBullet(){
+bool Space::spaceHasAnyBullet() const {
 	for(int i = 0; i < _ship.getMaxBullets(); i++){
 		if(_ship.bulletExists(i)){
 			return true;
@@ -109,7 +109,7 @@ bool Space::spaceHasAnyBullet(){
 	}
 	return false;
 }
-bool Space::spaceHasAllBullets() {
+bool Space::spaceHasAllBullets() const {
 	int count = 0;
 	for (int i = 0; i < _ship.getMaxBullets(); i++){
 		if (_ship.bulletExists(i)){
@@ -212,11 +212,11 @@ void Space::newStage() {
 		_stage++;
 		addScoreClearAsteroids();
 		resetAsteroids();
-		addHeart();
+		_hearts++;
 	}
 }
 
-void Space::pauseGame(double fps) {
+void Space::pauseGame(double fps) const {
 	Sounds::playPauseSound();
 	HUD::printPause();
 	while (_getch() == 'h') {
@@ -243,12 +243,6 @@ void Space::setHearts() {
 		_hearts = 1;
 		break;
 	}
-}
-void Space::removeHeart() {
-	_hearts--;
-}
-void Space::addHeart() {
-	_hearts++;
 }
 
 void Space::addScoreAsteroidSmall() {

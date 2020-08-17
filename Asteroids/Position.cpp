@@ -36,7 +36,7 @@ void Position::plusOneXY() {
 	setPosition(_x + 1, _y + 1);
 }
 
-bool Position::equals(Position position) {
+bool Position::equals(Position position) const {
 	return _x == position.getX() && _y == position.getY();
 }
 

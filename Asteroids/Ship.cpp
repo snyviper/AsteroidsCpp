@@ -41,11 +41,11 @@ void Ship::newBulletsFrame() {
 		_bullet[i].newFrame();
 }
 
-Position Ship::getPosition() { return _position; }
-Position Ship::getScopePosition() { return _scopePosition; }
-int Ship::getFacing() { return _facing; }
-int Ship::getMaxBullets() { return MAX_BULLETS; }
-Bullet Ship::getBullet(int index) { return _bullet[index]; }
+Position Ship::getPosition() const { return _position; }
+Position Ship::getScopePosition() const { return _scopePosition; }
+int Ship::getFacing() const { return _facing; }
+int Ship::getMaxBullets() const { return MAX_BULLETS; }
+Bullet Ship::getBullet(int index) const { return _bullet[index]; }
 
 void Ship::turnRight() {
 	if (_facing == 7)
@@ -63,7 +63,7 @@ void Ship::turnLeft() {
 }
 void Ship::accelerate() { _speed.accelerate(_facing); }
 
-bool Ship::asteroidHitShip(std::vector<Asteroid>& asteroid) {
+bool Ship::asteroidHitShip(std::vector<Asteroid>& asteroid) const {
 	for (int i = 0; i < asteroid.size(); i++) {
 		if (asteroid.at(i).isBig()) {
 			for (int j = 0; j < 9; j++) {
@@ -109,4 +109,4 @@ int Ship::shoot(std::vector<Asteroid>& asteroid) {
 	return -1;
 }
 
-bool Ship::bulletExists(int index) { return _bullet[index].exists(); }
+bool Ship::bulletExists(int index) const { return _bullet[index].exists(); }

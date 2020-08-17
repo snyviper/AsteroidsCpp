@@ -140,7 +140,7 @@ void Asteroid::turnSmall(int difficulty) {
 	_speed.setSpeed(randomSpeed(difficulty), randomSpeed(difficulty));
 }
 
-bool Asteroid::isBig() { return _big; }
-Position Asteroid::getPositionSmall() { return _position[0]; }
+bool Asteroid::isBig() const { return _big; }
+Position Asteroid::getPositionSmall() const { return _position[0]; }
 Position* Asteroid::getPositionBig() { return _position; }
-Speed Asteroid::getSpeed() { return _speed; }
+Speed Asteroid::getSpeed() const { return _speed; }

@@ -29,10 +29,10 @@ public:
 
 	void turnSmall(int difficulty);
 
-	bool isBig();
-	Position getPositionSmall();
+	bool isBig() const;
+	Position getPositionSmall() const;
 	Position* getPositionBig();
-	Speed getSpeed();
+	Speed getSpeed() const;
 };
 
 #endif

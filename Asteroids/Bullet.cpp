@@ -1,5 +1,6 @@
 #include "Bullet.h"
 
+//public:
 Bullet::Bullet() : _existence(false), _position(Position(0, 0)), _speed(Speed(0, 0)), _remainingFrames(0) {
 	
 }
@@ -65,5 +66,5 @@ bool Bullet::hitAsteroid(Position positionAsteroid) {
 	return false;
 }
 
-bool Bullet::exists() { return _existence; }
-Position Bullet::getPosition(){ return _position; }
+bool Bullet::exists() const { return _existence; }
+Position Bullet::getPosition() const { return _position; }

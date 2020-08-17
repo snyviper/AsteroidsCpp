@@ -18,7 +18,7 @@ public:
 	void setPositionScopeStart();
 	void plusOneXY();
 
-	bool equals(Position position);
+	bool equals(Position position) const;
 
 	void moveBullet(Speed speed);
 

@@ -26,21 +26,21 @@ public:
 	void newShipFrame(int frame);
 	void newBulletsFrame();
 
-	Position getPosition();
-	Position getScopePosition();
-	int getFacing();
-	int getMaxBullets();
-	Bullet getBullet(int index);
+	Position getPosition() const;
+	Position getScopePosition() const;
+	int getFacing() const;
+	int getMaxBullets() const;
+	Bullet getBullet(int index) const;
 
 	void turnRight();
 	void turnLeft();
 	void accelerate();
 
-	bool asteroidHitShip(std::vector<Asteroid>& asteroid);
+	bool asteroidHitShip(std::vector<Asteroid>& asteroid) const;
 	int bulletsHitAsteroid(std::vector<Asteroid>& asteroid);
 	int shoot(std::vector<Asteroid>& asteroid);
 
-	bool bulletExists(int index);
+	bool bulletExists(int index) const;
 };
 
 #endif

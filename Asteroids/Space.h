@@ -22,18 +22,18 @@ class Space
 	bool asteroidHitShip();
 
 	void movePrintAsteroids();
-	void printAsteroids();
+	void printAsteroids() const;
 
-	void printBullets();
+	void printBullets() const;
 
 	void damageShip();
 
-	void help(double fps);
+	void help(double fps) const;
 
-	double getFPS(clock_t refreshRate);
+	double getFPS(clock_t refreshRate) const;
 
-	bool spaceHasAnyBullet();
-	bool spaceHasAllBullets();
+	bool spaceHasAnyBullet() const;
+	bool spaceHasAllBullets() const;
 
 	void beforeStartBattle();
 	void startBattle();
@@ -41,14 +41,12 @@ class Space
 	void newStage();
 
 	void setHearts();
-	void removeHeart();
-	void addHeart();
 
 	void addScoreAsteroidSmall();
 	void addScoreAsteroidBig();
 	void addScoreClearAsteroids();
 
-	void pauseGame(double fps);
+	void pauseGame(double fps) const;
 
 public:
 	Space();

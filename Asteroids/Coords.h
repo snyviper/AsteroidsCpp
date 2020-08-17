@@ -11,11 +11,11 @@ public:
 	Coords();
 	Coords(int x, int y);
 
-	bool equals(Coords coords);
-	bool equals(int x, int y);
+	bool equals(Coords coords) const;
+	bool equals(int x, int y) const;
 
-	int getX();
-	int getY();
+	int getX() const;
+	int getY() const;
 };
 
 #endif

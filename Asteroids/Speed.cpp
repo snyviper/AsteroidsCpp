@@ -83,7 +83,7 @@ void Speed::setSpeed(int x, int y) {
 	_y = y;
 }
 
-bool Speed::equals(Speed speed) {
+bool Speed::equals(Speed speed) const {
 	return _x == speed.getX() && _y == speed.getY();
 }
 
