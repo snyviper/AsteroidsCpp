@@ -10,11 +10,11 @@
 class Ship
 {
 //private:
-	Position scopePosition;
-	Position position;
-	Speed speed;
+	Position _scopePosition;
+	Position _position;
+	Speed _speed;
 	static const int MAX_BULLETS = 3;
-	Bullet bullet[MAX_BULLETS];
+	Bullet _bullet[MAX_BULLETS];
 	int _facing;
 
 	int bulletHitsAsteroid(std::vector<Asteroid>& asteroid, int index);
